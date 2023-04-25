@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="LessonProj.Component.Header"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModal="clr-namespace:LessonProj.ViewModal"
+    x:DataType="viewModal:HeaderViewModal">
+    <StackLayout Orientation="Horizontal" Style="{StaticResource Heder}">
+        <Button
+            Command="{Binding Preview}"
+            HorizontalOptions="StartAndExpand"
+            Style="{StaticResource CustonButtonRed}"
+            Text="Back"
+            VerticalOptions="Center" />
+
+        <StackLayout
+            x:Name="RightGroup"
+            HorizontalOptions="EndAndExpand"
+            Orientation="Horizontal"
+            Spacing="10">
+            <Button
+                Command="{Binding Add}"
+                Style="{StaticResource CustonButtonBlue}"
+                Text="Add"
+                VerticalOptions="Start" />
+        </StackLayout>
+    </StackLayout>
+</ContentView>

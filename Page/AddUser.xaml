@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="LessonProj.Page.AddUser"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:component="clr-namespace:LessonProj.Component"
+    xmlns:local="clr-namespace:LessonProj.Page"
+    xmlns:viewModal="clr-namespace:LessonProj.ViewModal"
+    x:DataType="viewModal:AddUserViewModal"
+    Shell.NavBarIsVisible="True">
+    <ScrollView>
+
+        <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
+
+            <component:Header x:Name="Header" BindingContext="{Binding HeaderViewModal}" />
+
+            <Frame
+                Margin="10"
+                Padding="20"
+                MaximumWidthRequest="600"
+                Style="{StaticResource Wall}"
+                VerticalOptions="CenterAndExpand">
+
+                <StackLayout Orientation="Vertical" Spacing="15">
+
+                    <StackLayout Orientation="Vertical">
+                        <Label Style="{StaticResource SubTitle}" Text="Name" />
+                        <Frame
+                            Padding="0"
+                            BorderColor="{StaticResource CustomDark}"
+                            CornerRadius="8">
+                            <Entry
+                                Placeholder="Name"
+                                Style="{StaticResource CustomEntry}"
+                                Text="{Binding User.Name}" />
+                        </Frame>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical">
+                        <Label Style="{StaticResource SubTitle}" Text="LastName" />
+                        <Frame
+                            Padding="0"
+                            BorderColor="{StaticResource CustomDark}"
+                            CornerRadius="8">
+                            <Entry
+                                Placeholder="LastName"
+                                Style="{StaticResource CustomEntry}"
+                                Text="{Binding User.Lastname}" />
+                        </Frame>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical">
+                        <Label Style="{StaticResource SubTitle}" Text="Phone" />
+                        <Frame
+                            Padding="0"
+                            BorderColor="{StaticResource CustomDark}"
+                            CornerRadius="8">
+                            <Entry
+                                Placeholder="Phone"
+                                Style="{StaticResource CustomEntry}"
+                                Text="{Binding User.Phone}" />
+                        </Frame>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical">
+                        <Label Style="{StaticResource SubTitle}" Text="Mail" />
+                        <Frame
+                            Padding="0"
+                            BorderColor="{StaticResource CustomDark}"
+                            CornerRadius="8">
+                            <Entry
+                                Placeholder="Mail"
+                                Style="{StaticResource CustomEntry}"
+                                Text="{Binding User.Mail}" />
+                        </Frame>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical">
+                        <Label Style="{StaticResource SubTitle}" Text="Login" />
+                        <Frame
+                            Padding="0"
+                            BorderColor="{StaticResource CustomDark}"
+                            CornerRadius="8">
+                            <Entry
+                                Placeholder="Login Min 5"
+                                Style="{StaticResource CustomEntry}"
+                                Text="{Binding User.Login}" />
+                        </Frame>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical">
+                        <Label Style="{StaticResource SubTitle}" Text="Password" />
+                        <Frame
+                            Padding="0"
+                            BorderColor="{StaticResource CustomDark}"
+                            CornerRadius="8">
+                            <Entry
+                                IsPassword="True"
+                                Placeholder="Password Min 6"
+                                Style="{StaticResource CustomEntry}"
+                                Text="{Binding User.Password}" />
+                        </Frame>
+                    </StackLayout>
+
+                    <Button
+                        Padding="0,15"
+                        Command="{Binding PostUserCommand}"
+                        HorizontalOptions="FillAndExpand"
+                        Style="{StaticResource CustonButtonBlue}"
+                        Text="Add User" />
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

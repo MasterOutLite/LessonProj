@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:LessonProj/Resources/Styles">
+
+    <Color x:Key="CustomGreen">#26C497</Color>
+    <Color x:Key="CustomYellow">#DEE254</Color>
+    <Color x:Key="CustomBlue">#1682EF</Color>
+    <Color x:Key="CustomBlueLight">#20ACF2</Color>
+    <Color x:Key="CustomAqua">#13EADF</Color>
+    <!--<Color x:Key="CustomAquaLight">#67FFFF</Color>-->
+    <Color x:Key="CustomAquaLight">#B9FFFF</Color>
+    <Color x:Key="CustomOrangeLight">#F99026</Color>
+    <Color x:Key="CustomOrange">#EF6B11</Color>
+    <Color x:Key="CustomRed">#ED4518</Color>
+    <Color x:Key="CustomWhite">#FFFFFF</Color>
+    <Color x:Key="CustomDark">#000000</Color>
+    <Color x:Key="CustomTemp1">#FFD2B3</Color>
+    <Color x:Key="CustomTemp2">#FFC497</Color>
+    <Color x:Key="CustomTemp3">#E2D5CC</Color>
+    <Color x:Key="CustomTemp4">#F9EFE8</Color>
+
+    <Style x:Key="SubTitle" TargetType="Label">
+        <Setter Property="FontSize" Value="Micro" />
+        <Setter Property="TextColor" Value="{StaticResource CustomDark}" />
+        <Setter Property="Margin" Value="0,5" />
+    </Style>
+
+    <Style x:Key="CustomEntry" TargetType="Entry">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Default={StaticResource CustomAqua}}" />
+        <Setter Property="PlaceholderColor" Value="{StaticResource Gray300}" />
+        <Setter Property="FontSize" Value="Medium" />
+        <Setter Property="TextColor" Value="{StaticResource CustomDark}" />
+
+    </Style>
+
+    <Style x:Key="Select" TargetType="Picker">
+        <Setter Property="BackgroundColor" Value="{StaticResource CustomOrangeLight}" />
+        <Setter Property="FontSize" Value="Small" />
+        <Setter Property="TextColor" Value="{StaticResource CustomWhite}" />
+        <Setter Property="TitleColor" Value="{StaticResource CustomDark}" />
+    </Style>
+
+    <Style x:Key="CustonButtonBlue" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Default={StaticResource CustomBlue}}" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Default={StaticResource CustomWhite}}" />
+        <Setter Property="BorderColor" Value="{StaticResource Black}" />
+        <Setter Property="BorderWidth" Value="1" />
+        <Setter Property="FontSize" Value="26" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="CornerRadius" Value="20" />
+        <Setter Property="Padding" Value="10,4" />
+    </Style>
+
+    <Style x:Key="CustonButtonGreen" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Default={StaticResource CustomGreen}}" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Default={StaticResource CustomWhite}}" />
+        <Setter Property="BorderColor" Value="{StaticResource Black}" />
+        <Setter Property="BorderWidth" Value="1" />
+        <Setter Property="FontSize" Value="26" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="CornerRadius" Value="20" />
+        <Setter Property="Padding" Value="10,4" />
+    </Style>
+
+    <Style x:Key="CustonButtonRed" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Default={StaticResource CustomRed}}" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Default={StaticResource CustomWhite}}" />
+        <Setter Property="BorderColor" Value="{StaticResource Black}" />
+        <Setter Property="BorderWidth" Value="1" />
+        <Setter Property="FontSize" Value="26" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="CornerRadius" Value="20" />
+        <Setter Property="Padding" Value="10,4" />
+    </Style>
+
+    <Style x:Key="CustonButtonOrange" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Default={StaticResource CustomOrange}}" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Default={StaticResource CustomWhite}}" />
+        <Setter Property="BorderColor" Value="{StaticResource Black}" />
+        <Setter Property="BorderWidth" Value="1" />
+        <Setter Property="FontSize" Value="26" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="CornerRadius" Value="20" />
+        <Setter Property="Padding" Value="10,4" />
+    </Style>
+
+    <Style x:Key="CustonButtonYellow" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Default={StaticResource CustomYellow}}" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource CustomWhite}}" />
+        <Setter Property="BorderColor" Value="{StaticResource Black}" />
+        <Setter Property="BorderWidth" Value="1" />
+        <Setter Property="FontSize" Value="26" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="CornerRadius" Value="20" />
+        <Setter Property="Padding" Value="10,4" />
+    </Style>
+
+    <Style x:Key="Wall" TargetType="Frame">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Default={StaticResource CustomAquaLight}}" />
+        <Setter Property="CornerRadius" Value="15" />
+    </Style>
+
+    <Style x:Key="ViewRecord" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Default={StaticResource CustomAquaLight}}" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 10" />
+        <Setter Property="Margin" Value="0,10" />
+        <Setter Property="Padding" Value="15" />
+        <Setter Property="MaximumWidthRequest" Value="600" />
+    </Style>
+
+    <Style x:Key="BlankKey" TargetType="Border">
+        <Setter Property="Background" Value="{AppThemeBinding Default={StaticResource CustomWhite}}" />
+        <Setter Property="Stroke" Value="{StaticResource Black}" />
+        <Setter Property="Padding" Value="8,2" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 10" />
+        <Setter Property="HorizontalOptions" Value="Start" />
+    </Style>
+
+    <Style x:Key="BlankValue" TargetType="Border">
+        <Setter Property="Background" Value="{AppThemeBinding Default={StaticResource CustomWhite}}" />
+        <Setter Property="Stroke" Value="{StaticResource Black}" />
+        <Setter Property="Padding" Value="8,2" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 10" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+    </Style>
+
+
+    <Style x:Key="AppBack" TargetType="StackLayout">
+        <Setter Property="Background" Value="{AppThemeBinding Light={StaticResource CustomTemp1}, Dark={StaticResource CustomDark}}" />
+    </Style>
+
+    <Style x:Key="Heder" TargetType="StackLayout">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Default={StaticResource CustomBlueLight}}" />
+        <Setter Property="Padding" Value="30,10" />
+    </Style>
+
+</ResourceDictionary>

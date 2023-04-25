@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="LessonProj.Component.ViewOrders"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:LessonProj.Component"
+    xmlns:viewModal="clr-namespace:LessonProj.ViewModal"
+    x:DataType="viewModal:OrdersViewModal">
+
+    <Border Style="{StaticResource ViewRecord}">
+        <StackLayout Orientation="Vertical" Spacing="6">
+
+
+            <StackLayout Orientation="Horizontal" Spacing="15">
+                <Border Style="{StaticResource BlankKey}">
+                    <Label Text="UUID" WidthRequest="100" />
+                </Border>
+                <Border Style="{StaticResource BlankValue}">
+                    <Label LineBreakMode="TailTruncation" Text="{Binding Orders.UUID}" />
+                </Border>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" Spacing="15">
+                <Border Style="{StaticResource BlankKey}">
+                    <Label Text="BookName" WidthRequest="100" />
+                </Border>
+                <Border Style="{StaticResource BlankValue}">
+                    <Label LineBreakMode="TailTruncation" Text="{Binding BookName}" />
+                </Border>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" Spacing="15">
+                <Border Style="{StaticResource BlankKey}">
+                    <Label Text="LibrarianName" WidthRequest="100" />
+                </Border>
+                <Border Style="{StaticResource BlankValue}">
+                    <Label LineBreakMode="TailTruncation" Text="{Binding LibrarianName}" />
+                </Border>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" Spacing="15">
+                <Border Style="{StaticResource BlankKey}">
+                    <Label Text="UserName" WidthRequest="100" />
+                </Border>
+                <Border Style="{StaticResource BlankValue}">
+                    <Label LineBreakMode="TailTruncation" Text="{Binding UserName}" />
+                </Border>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" Spacing="15">
+                <Border Style="{StaticResource BlankKey}">
+                    <Label Text="Took in date" WidthRequest="100" />
+                </Border>
+                <Border Style="{StaticResource BlankValue}">
+                    <Label LineBreakMode="TailTruncation" Text="{Binding Orders.TookInDate}" />
+                </Border>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" Spacing="15">
+                <Border Style="{StaticResource BlankKey}">
+                    <Label Text="Returned" WidthRequest="100" />
+                </Border>
+                <Border Style="{StaticResource BlankValue}">
+                    <Label LineBreakMode="TailTruncation" Text="{Binding Orders.Returned}" />
+                </Border>
+            </StackLayout>
+
+        </StackLayout>
+    </Border>
+
+</ContentView>

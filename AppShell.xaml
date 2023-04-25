@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="LessonProj.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:LessonProj"
+    xmlns:page="clr-namespace:LessonProj.Page"
+    Shell.FlyoutBehavior="Flyout">
+
+    <FlyoutItem Title="Main Page">
+        <ShellContent ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Book view">
+        <ShellContent ContentTemplate="{DataTemplate page:BookView}" Route="BookView" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Order view">
+        <ShellContent ContentTemplate="{DataTemplate page:OrderView}" Route="OrderView" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="User list view">
+        <ShellContent ContentTemplate="{DataTemplate page:UserListView}" Route="UserListView" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Add Library">
+        <ShellContent ContentTemplate="{DataTemplate page:AddLibrary}" Route="AddLibrary" />
+    </FlyoutItem>
+</Shell>

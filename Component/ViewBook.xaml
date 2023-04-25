@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="LessonProj.Component.ViewBook"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:component="clr-namespace:LessonProj.Component"
+    xmlns:local="clr-namespace:LessonProj.Component"
+    xmlns:viewModal="clr-namespace:LessonProj.ViewModal"
+    x:DataType="viewModal:BookViewModal">
+
+    <Border Style="{StaticResource ViewRecord}">
+        <StackLayout Orientation="Horizontal" Spacing="10">
+            <Border
+                HeightRequest="90"
+                StrokeShape="RoundRectangle 60"
+                WidthRequest="90">
+                <Image HeightRequest="60" WidthRequest="60" />
+            </Border>
+            <StackLayout
+                HorizontalOptions="FillAndExpand"
+                Orientation="Vertical"
+                Spacing="4">
+
+                <StackLayout Orientation="Horizontal" Spacing="10">
+                    <Border Style="{StaticResource BlankKey}">
+                        <Label Text="Name" WidthRequest="80" />
+                    </Border>
+                    <Border Style="{StaticResource BlankValue}">
+                        <Label Text="{Binding Book.Name}" />
+                    </Border>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Spacing="10">
+                    <Border Style="{StaticResource BlankKey}">
+                        <Label Text="Author" WidthRequest="80" />
+                    </Border>
+                    <Border Style="{StaticResource BlankValue}">
+                        <Label Text="{Binding Book.Author}" />
+                    </Border>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Spacing="10">
+                    <Border Style="{StaticResource BlankKey}">
+                        <Label Text="Library" WidthRequest="80" />
+                    </Border>
+                    <Border Style="{StaticResource BlankValue}">
+                        <Label LineBreakMode="TailTruncation" Text="{Binding LibraryName}" />
+                    </Border>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Spacing="10">
+                    <Border Style="{StaticResource BlankKey}">
+                        <Label Text="In library" WidthRequest="80" />
+                    </Border>
+                    <Border Style="{StaticResource BlankValue}">
+                        <Label Text="{Binding Book.InLibrary}" />
+                    </Border>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </Border>
+</ContentView>

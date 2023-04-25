@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="LessonProj.Page.UserListView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:component="clr-namespace:LessonProj.Component"
+    xmlns:local="clr-namespace:LessonProj.Page"
+    xmlns:viewModal="clr-namespace:LessonProj.ViewModal"
+    x:DataType="viewModal:UserListViewModal">
+    <ScrollView>
+        <StackLayout Padding="15,30">
+            <StackLayout
+                HorizontalOptions="EndAndExpand"
+                Orientation="Horizontal"
+                Spacing="15">
+                <Button
+                    Command="{Binding GetAllUserCommand}"
+                    HorizontalOptions="StartAndExpand"
+                    Style="{StaticResource CustonButtonBlue}"
+                    Text="Оновити" />
+
+                <Button
+                    Command="{Binding OpenAddUserCommand}"
+                    HorizontalOptions="EndAndExpand"
+                    Style="{StaticResource CustonButtonGreen}"
+                    Text="Додати" />
+            </StackLayout>
+
+            <StackLayout
+                Margin="0,10"
+                HorizontalOptions="FillAndExpand"
+                MaximumWidthRequest="800"
+                Orientation="Horizontal"
+                Spacing="5">
+                <Frame
+                    Padding="0"
+                    BackgroundColor="{StaticResource CustomWhite}"
+                    CornerRadius="15"
+                    HorizontalOptions="FillAndExpand">
+                    <Entry
+                        HorizontalTextAlignment="Center"
+                        Placeholder="Enter name"
+                        Text="Text" />
+                </Frame>
+                <Button Style="{StaticResource CustonButtonBlue}" Text="Search" />
+            </StackLayout>
+
+            <StackLayout Padding="0,15" Orientation="Vertical">
+                <CollectionView
+                    x:Name="Selection"
+                    ItemsSource="{Binding Users}"
+                    SelectedItem="{Binding SelectedUser}"
+                    SelectionChangedCommand="{Binding SelectionUserCommand}"
+                    SelectionMode="Single">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <component:ViewUser />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                    <CollectionView.EmptyView>
+                        <StackLayout Orientation="Vertical">
+                            <Border Style="{StaticResource ViewRecord}">
+                                <StackLayout HorizontalOptions="Center" Orientation="Vertical">
+                                    <Label HorizontalTextAlignment="Center" Text="List is empty" />
+                                    <Label HorizontalTextAlignment="Center" Text="Please update this list" />
+                                </StackLayout>
+                            </Border>
+                        </StackLayout>
+                    </CollectionView.EmptyView>
+                </CollectionView>
+            </StackLayout>
+        </StackLayout>
+
+
+    </ScrollView>
+</ContentPage>

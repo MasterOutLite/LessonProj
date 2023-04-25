@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="LessonProj.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:changed="clr-namespace:LessonProj.Modal"
+    xmlns:local="clr-namespace:LessonProj"
+    x:DataType="local:ChangedView"
+    Shell.NavBarIsVisible="True">
+
+    <ScrollView>
+        <Frame Style="{StaticResource Wall}">
+            <StackLayout
+                Padding="0"
+                HorizontalOptions="Center"
+                Orientation="Vertical"
+                Spacing="10"
+                Style="{StaticResource Wall}"
+                VerticalOptions="Center">
+
+                <Button
+                    Clicked="OnPostRequestBook"
+                    Style="{StaticResource CustonButtonBlue}"
+                    Text="Post"
+                    WidthRequest="160" />
+                <Button
+                    Style="{StaticResource CustonButtonGreen}"
+                    Text="Post"
+                    WidthRequest="160" />
+                <Button
+                    Style="{StaticResource CustonButtonRed}"
+                    Text="Post"
+                    WidthRequest="160" />
+                <Button
+                    Style="{StaticResource CustonButtonYellow}"
+                    Text="Post"
+                    WidthRequest="160" />
+                <Button
+                    Style="{StaticResource CustonButtonOrange}"
+                    Text="Post"
+                    WidthRequest="160" />
+                <Button Text="Post" />
+
+
+            </StackLayout>
+        </Frame>
+    </ScrollView>
+
+</ContentPage>
