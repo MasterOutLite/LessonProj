@@ -1,30 +1,24 @@
-﻿using Newtonsoft.Json;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Newtonsoft.Json;
 using System.ComponentModel;
 
 namespace LessonProj.Modal
 {
-    public class Orders : INotifyPropertyChanged
+    public partial class Orders : ObservableObject
     {
-
+        [ObservableProperty]
         private string _uuid = "";
+        [ObservableProperty]
         private string _bookUuid = "";
+        [ObservableProperty]
         private string _userUuid = "";
+        [ObservableProperty]
         private string _librarianUuid = "";
-        private DateTimeOffset _tookInDate = DateTimeOffset.Now;       
+        [ObservableProperty]
+        private DateTimeOffset _tookInDate = DateTimeOffset.Now;
+        [ObservableProperty]
         private DateTimeOffset _returnDate;
+        [ObservableProperty]
         private bool _returned = false;
-
-        public string UUID { get => _uuid; set { _uuid = value; OnPropertyChanged(nameof(UUID)); } }
-        public string BookUuid { get => _bookUuid; set { _bookUuid = value; OnPropertyChanged(nameof(BookUuid)); } }
-        public string UserUuid { get => _userUuid; set { _userUuid = value; OnPropertyChanged(nameof(UserUuid)); } }
-        public string LibrarianUuid { get => _librarianUuid; set { _librarianUuid = value; OnPropertyChanged(nameof(LibrarianUuid)); } }
-        public DateTimeOffset TookInDate { get => _tookInDate; set { _tookInDate = value; OnPropertyChanged(nameof(TookInDate)); } }
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public DateTimeOffset ReturnDate { get => _returnDate; set { _returnDate = value; OnPropertyChanged(nameof(ReturnDate)); } }
-        public bool Returned { get => _returned; set { _returned = value; OnPropertyChanged(nameof(Returned)); } }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged (string propertyName) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

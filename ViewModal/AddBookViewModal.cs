@@ -29,15 +29,25 @@ namespace LessonProj.ViewModal
             _libraryService = libraryService;
             GenreList = new ObservableCollection<string> { "Roman", "History", "Fantasi" };
             LibraryList = new ObservableCollection<string>();
-            HeaderModal = new HeaderViewModal(new AsyncCommand(async () => await PostBook()));
+            var add = new ShowButton("Додати", new AsyncRelayCommand(PostBook));
+            HeaderModal = new HeaderViewModal(new ShowButton(),null, add);                
             Book.InLibrary = true;
             GetLibrary();
         }
 
         public async void GetLibrary ()
         {
-            if (!_libraryService.IsBackup)
-                await _libraryService.GetLibraryAsync();
+            try
+            {
+                if (!_libraryService.IsBackup)
+                    await _libraryService.GetLibraryAsync();
+            }
+            catch (Exception ex)
+            {
+                await Shell.Current.DisplayAlert("Get Library fail",
+                   "Error connection to server.",
+                   "Ok");
+            }
 
             _libraryList = _libraryService.Backup;
             LibraryList.Clear();
@@ -61,7 +71,7 @@ namespace LessonProj.ViewModal
             Library selectLibrary = _libraryList[SelectLibraryIndex];
             Book.LibraryUuid = selectLibrary.Name;
 
-            await Shell.Current.DisplayAlert("Book", $"Name '{Book.Name}'. Genre '{Book.Genre}'. InLibrary '{Book.InLibrary}'. Author '{Book.Author}'. Library '{Book.LibraryUuid}'", "Ok");
+            await Shell.Current.DisplayAlert("Book", $"Name '{Book.Name}'. Genre '{Book.Ganre}'. InLibrary '{Book.InLibrary}'. Author '{Book.Author}'. Library '{Book.LibraryUuid}'", "Ok");
         }
     }
 }

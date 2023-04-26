@@ -23,7 +23,7 @@ namespace LessonProj.Service
 
         public bool GetOrdersByUuid (string uuid, out Orders orders)
         {
-            orders = Backup.Find(orders => orders.UUID == uuid);
+            orders = Backup.Find(orders => orders.Uuid == uuid);
             return orders != null;
         }
 

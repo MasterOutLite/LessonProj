@@ -10,26 +10,11 @@
 
     <ScrollView>
 
-        <StackLayout Padding="15,30" Orientation="Vertical">
-            <StackLayout
-                HorizontalOptions="EndAndExpand"
-                Orientation="Horizontal"
-                Spacing="15">
+        <StackLayout Orientation="Vertical">
 
-                <Button
-                    Command="{Binding GetOrdersCommand}"
-                    HorizontalOptions="StartAndExpand"
-                    Style="{StaticResource CustonButtonBlue}"
-                    Text="Оновити" />
+            <component:Header BindingContext="{Binding HeaderViewModal}" />
 
-                <Button
-                    Command="{Binding ShowAddOrdersCommand}"
-                    HorizontalOptions="EndAndExpand"
-                    Style="{StaticResource CustonButtonGreen}"
-                    Text="Додати" />
-            </StackLayout>
-
-            <StackLayout Padding="0,30" Orientation="Vertical">
+            <StackLayout Padding="0,15" Orientation="Vertical">
                 <CollectionView
                     ItemsSource="{Binding Orders}"
                     SelectedItem="{Binding SelectedOrders}"

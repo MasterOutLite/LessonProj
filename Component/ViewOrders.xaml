@@ -16,7 +16,7 @@
                     <Label Text="UUID" WidthRequest="100" />
                 </Border>
                 <Border Style="{StaticResource BlankValue}">
-                    <Label LineBreakMode="TailTruncation" Text="{Binding Orders.UUID}" />
+                    <Label LineBreakMode="TailTruncation" Text="{Binding Orders.Uuid}" />
                 </Border>
             </StackLayout>
 

@@ -7,10 +7,11 @@
     x:DataType="viewModal:HeaderViewModal">
     <StackLayout Orientation="Horizontal" Style="{StaticResource Heder}">
         <Button
-            Command="{Binding Preview}"
+            Command="{Binding Preview.Command}"
             HorizontalOptions="StartAndExpand"
+            IsVisible="{Binding ShowPreview}"
             Style="{StaticResource CustonButtonRed}"
-            Text="Back"
+            Text="{Binding Preview.Title}"
             VerticalOptions="Center" />
 
         <StackLayout
@@ -19,9 +20,16 @@
             Orientation="Horizontal"
             Spacing="10">
             <Button
-                Command="{Binding Add}"
+                Command="{Binding Update.Command}"
+                HorizontalOptions="Start"
+                IsVisible="{Binding ShowUpdate}"
+                Style="{StaticResource CustonButtonGreen}"
+                Text="{Binding Update.Title}" />
+            <Button
+                Command="{Binding Add.Command}"
+                IsVisible="{Binding ShowAdd}"
                 Style="{StaticResource CustonButtonBlue}"
-                Text="Add"
+                Text="{Binding Add.Title}"
                 VerticalOptions="Start" />
         </StackLayout>
     </StackLayout>

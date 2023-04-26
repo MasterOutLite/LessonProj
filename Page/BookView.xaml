@@ -10,27 +10,10 @@
 
     <ScrollView>
 
-        <StackLayout Padding="15,30">
-            <StackLayout
-                BackgroundColor="{StaticResource CustomBlueLight}"
-                HorizontalOptions="EndAndExpand"
-                Orientation="Horizontal"
-                Spacing="15">
+        <StackLayout Orientation="Vertical">
+            <component:Header BindingContext="{Binding HeaderViewModal}" />
 
-                <Button
-                    Command="{Binding GetAllBookCommand}"
-                    HorizontalOptions="StartAndExpand"
-                    Style="{StaticResource CustonButtonBlue}"
-                    Text="Оновити" />
-
-                <Button
-                    Command="{Binding AddBookCommand}"
-                    HorizontalOptions="EndAndExpand"
-                    Style="{StaticResource CustonButtonGreen}"
-                    Text="Додати" />
-            </StackLayout>
-
-            <StackLayout Padding="0,30" Orientation="Vertical">
+            <StackLayout Padding="0,15" Orientation="Vertical">
                 <CollectionView
                     ItemsSource="{Binding Books}"
                     SelectedItem="{Binding SelectedBook}"

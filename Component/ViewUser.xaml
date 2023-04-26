@@ -26,7 +26,7 @@
                         <Label Text="Name" WidthRequest="80" />
                     </Border>
                     <Border Style="{StaticResource BlankValue}">
-                        <Label Text="{Binding UUID}" />
+                        <Label Text="{Binding Uuid}" />
                     </Border>
                 </StackLayout>
 
@@ -44,7 +44,7 @@
                         <Label Text="Author" WidthRequest="80" />
                     </Border>
                     <Border Style="{StaticResource BlankValue}">
-                        <Label Text="{Binding LastName}" />
+                        <Label Text="{Binding Lastname}" />
                     </Border>
                 </StackLayout>
 

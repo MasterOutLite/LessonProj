@@ -3,7 +3,6 @@ using CommunityToolkit.Mvvm.Input;
 using LessonProj.Modal;
 using LessonProj.Page;
 using LessonProj.Service;
-using MvvmHelpers.Commands;
 using System.Collections.ObjectModel;
 
 namespace LessonProj.ViewModal
@@ -12,8 +11,8 @@ namespace LessonProj.ViewModal
     {
         public ObservableCollection<BookViewModal> Books { get; } = new();
         public BookViewModal SelectedBook { get; set; }
-        public AsyncCommand GetListBook { get; }
-        public AsyncCommand OpenAddBook { get; }
+
+        public HeaderViewModal HeaderViewModal { get; }
 
         private BookService _bookService;
         private IServiceProvider _provider;
@@ -21,8 +20,9 @@ namespace LessonProj.ViewModal
         {
             _provider = provider;
             _bookService = bookService;
-            GetListBook = new AsyncCommand(async () => await GetAllBook());
-            OpenAddBook = new AsyncCommand(async () => await AddBook());
+            var update = new ShowButton("Оновити", new AsyncRelayCommand(GetAllBook));
+            var add = new ShowButton("Додати", new AsyncRelayCommand(AddBook));
+            HeaderViewModal = new(null, update, add);
         }
 
         [RelayCommand]
@@ -34,14 +34,23 @@ namespace LessonProj.ViewModal
                 return;
             }
 
-            var response = await _bookService.GetBooksAsync();
-            var libraryService = _provider.GetService<LibraryService>();
-
-            Books.Clear();
-            foreach (Book book in response)
+            try
             {
-                await libraryService.GetLibraryByUuidAsync(book.LibraryUuid);
-                Books.Add(new BookViewModal(book, libraryService));
+                var response = await _bookService.GetBooksAsync();
+
+                var libraryService = _provider.GetService<LibraryService>();
+
+                Books.Clear();
+                foreach (Book book in response)
+                {
+                    await libraryService.GetLibraryByUuidAsync(book.LibraryUuid);
+                    Books.Add(new BookViewModal(book, libraryService));
+                }
+            }
+            catch (Exception ex)
+            {
+                await Shell.Current.DisplayAlert("Fail update",
+                    "Check network connection or this fail server", "Ok");
             }
         }
 

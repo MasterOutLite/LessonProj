@@ -11,7 +11,8 @@ namespace LessonProj.ViewModal
         public AddUserViewModal (UserService userService)
         {
             _userService = userService;
-            HeaderViewModal = new(new AsyncCommand(async () => await PostUserAsync()));
+            var add = new ShowButton("Додати", new AsyncRelayCommand(PostUserAsync));
+            HeaderViewModal = new(new ShowButton(),null,add);
         }
 
         public HeaderViewModal HeaderViewModal { get; }

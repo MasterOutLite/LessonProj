@@ -2,7 +2,6 @@
 using CommunityToolkit.Mvvm.Input;
 using LessonProj.Modal;
 using LessonProj.Service;
-using MvvmHelpers.Commands;
 
 namespace LessonProj.ViewModal
 {
@@ -14,7 +13,8 @@ namespace LessonProj.ViewModal
 
         public AddLibraryViewModal (LibraryService librarianService)
         {
-            HeaderViewModal = new(new AsyncCommand(async () => await PostLibraryAsync()));
+            var add = new ShowButton("Додати", new AsyncRelayCommand(PostLibraryAsync));
+            HeaderViewModal = new(new ShowButton(), null, add);
             _libraryService = librarianService;
         }
 
@@ -22,7 +22,13 @@ namespace LessonProj.ViewModal
         public async Task PostLibraryAsync ()
         {
             if (string.IsNullOrWhiteSpace(Library.Name) || string.IsNullOrWhiteSpace(Library.Address))
+            {
+                await Shell.Current.DisplayAlert("Validation fail",
+                    "No information was entered in some fields",
+                    "Ok");
                 return;
+            }
+                
 
             if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {

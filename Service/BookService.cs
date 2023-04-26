@@ -23,7 +23,7 @@ namespace LessonProj.Service
 
         public bool GetBookByUuid (string uuid, out Book book)
         {
-            book = Backup.Find(book => book.UUID == uuid);
+            book = Backup.Find(book => book.Uuid == uuid);
             return book != null;
         }
 

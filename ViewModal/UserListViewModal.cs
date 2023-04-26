@@ -8,10 +8,10 @@ using System.Collections.ObjectModel;
 namespace LessonProj.ViewModal
 {
     public partial class UserListViewModal : ObservableObject
-    {      
+    {
 
         public ObservableCollection<User> Users { get; } = new();
-
+        public HeaderViewModal HeaderViewModal { get; }
         public User SelectedUser { get; set; }
         public CollectionView Selection { get; }
 
@@ -20,13 +20,16 @@ namespace LessonProj.ViewModal
 
         private UserService _userService;
         private Action<User> _takeUser;
-        public UserListViewModal (UserService userService,CollectionView collectionView)
+        public UserListViewModal (UserService userService, CollectionView collectionView)
         {
             _userService = userService;
             Selection = collectionView;
+            var update = new ShowButton("Оновити", new AsyncRelayCommand(GetAllUser));
+            var add = new ShowButton("Додати", new AsyncRelayCommand(OpenAddUser));
+            HeaderViewModal = new(null, update, add);
         }
 
-        public UserListViewModal (UserService userService,Action<User> takeUser)
+        public UserListViewModal (UserService userService, Action<User> takeUser)
         {
             _userService = userService;
             _takeUser = takeUser;
@@ -35,11 +38,20 @@ namespace LessonProj.ViewModal
         [RelayCommand]
         public async Task GetAllUser ()
         {
-            var response = await _userService.GetUsersAsync();
+            try
+            {
+                var response = await _userService.GetUsersAsync();
 
-            Users.Clear();
-            foreach (var user in response)
-                Users.Add(user);
+                Users.Clear();
+                foreach (var user in response)
+                    Users.Add(user);
+            }
+            catch (Exception ex)
+            {
+                await Shell.Current.DisplayAlert("Fail update",
+                    "Check network connection or this fail server", "Ok");
+
+            }
         }
 
         [RelayCommand]
@@ -51,8 +63,8 @@ namespace LessonProj.ViewModal
 
         [RelayCommand]
         public async Task SelectionUser ()
-        {            
-            if(_takeUser != null)
+        {
+            if (_takeUser != null)
             {
                 _takeUser.Invoke(SelectedUser);
                 await Shell.Current.Navigation.PopAsync();

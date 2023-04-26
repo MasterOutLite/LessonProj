@@ -24,7 +24,7 @@ namespace LessonProj.Service
 
         public bool GetLibraryByUuid (string uuid, out Library library)
         {
-            library = Backup.Find(library => library.UUID == uuid);
+            library = Backup.Find(library => library.Uuid == uuid);
             return library != null;
         }
 

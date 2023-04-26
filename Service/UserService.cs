@@ -23,7 +23,7 @@ namespace LessonProj.Service
 
         public bool GetUserByUuid (string uuid, out User user)
         {
-            user = Backup.Find(user => user.UUID == uuid);
+            user = Backup.Find(user => user.Uuid == uuid);
             return user != null;
         }
 
