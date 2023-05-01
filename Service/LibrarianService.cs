@@ -1,5 +1,8 @@
 ﻿using LessonProj.Modal;
+using Newtonsoft.Json;
 using System.Net.Http.Json;
+using System.Net.Mime;
+using System.Text;
 
 namespace LessonProj.Service
 {
@@ -26,6 +29,36 @@ namespace LessonProj.Service
         {
             librarian = Backup.Find(librarian => librarian.Uuid == uuid);
             return librarian != null;
+        }
+
+        public async Task<ResponseAuth> CheckAuth (RequestAuth auth)
+        {
+            ResponseAuth responseAuth = new ResponseAuth();
+
+            string requestJson = JsonConvert.SerializeObject(auth);
+
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri($"{_path}/login"),
+                Content = new StringContent(requestJson, Encoding.UTF8, "application/json"),
+            };
+            var response = await _httpClient.SendAsync(request);
+            
+            if (response.IsSuccessStatusCode)
+            {
+                responseAuth = await response.Content.ReadFromJsonAsync<ResponseAuth>();
+            }
+
+            else
+            {
+                var exception = await response.Content.ReadFromJsonAsync<ExceptionMsg>();
+                await Shell.Current.DisplayAlert("LogIn fail",
+                    $"Failed LogIn. Code: {exception.Code}. Msg: {exception.Msg}",
+                    "Ok");
+            }
+
+            return responseAuth;
         }
 
         public async Task<Librarian> GetLibrarianByUuidAsync (string uuid)
@@ -73,7 +106,7 @@ namespace LessonProj.Service
             return Backup;
         }
 
-        public async Task PostLibrarianAsync(Librarian librarian)
+        public async Task PostLibrarianAsync (Librarian librarian)
         {
             if (librarian == null)
                 return;

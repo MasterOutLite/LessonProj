@@ -7,9 +7,12 @@
     xmlns:page="clr-namespace:LessonProj.Page"
     Shell.FlyoutBehavior="Flyout">
 
-    <FlyoutItem Title="Main Page">
-        <ShellContent ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage" />
-    </FlyoutItem>
+
+    <ShellContent
+        ContentTemplate="{DataTemplate page:LogIn}"
+        Route="LogIn"
+        Shell.FlyoutItemIsVisible="False" />
+
 
     <FlyoutItem Title="Book view">
         <ShellContent ContentTemplate="{DataTemplate page:BookView}" Route="BookView" />

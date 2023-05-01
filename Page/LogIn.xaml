@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="LessonProj.Page.LogIn"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:LessonProj.Page"
+    xmlns:viewModal="clr-namespace:LessonProj.ViewModal"
+    x:DataType="viewModal:LogInViewModal"
+    Shell.FlyoutBehavior="Disabled"
+    Shell.NavBarIsVisible="False">
+    <StackLayout
+        MaximumWidthRequest="400"
+        Orientation="Vertical"
+        Spacing="20"
+        VerticalOptions="CenterAndExpand">
+
+        <Label
+            FontSize="Title"
+            HorizontalTextAlignment="Center"
+            Text="Welcom to your account" />
+
+        <Border StrokeShape="RoundRectangle 10">
+            <Entry
+                FontSize="Medium"
+                Placeholder="Login"
+                Text="{Binding Login}" />
+        </Border>
+
+        <Border StrokeShape="RoundRectangle 10">
+            <Entry
+                FontSize="Medium"
+                IsPassword="True"
+                Placeholder="Password"
+                Text="{Binding Password}" />
+        </Border>
+
+        <StackLayout IsVisible="False" Orientation="Vertical">
+            <Label Text="Remember me" TextColor="Gray" />
+            <Switch />
+        </StackLayout>
+        <Button
+            Padding="30,5"
+            Command="{Binding LogInCommand}"
+            HorizontalOptions="Center"
+            Style="{StaticResource CustonButtonGreen}"
+            Text="Увійти" />
+        <Button
+            Padding="30,5"
+            Command="{Binding SkipCommand}"
+            HorizontalOptions="Center"
+            Style="{StaticResource CustonButtonGreen}"
+            Text="Увійти" />
+    </StackLayout>
+</ContentPage>
