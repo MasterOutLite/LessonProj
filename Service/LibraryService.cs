@@ -15,7 +15,7 @@ namespace LessonProj.Service
 
         private HttpClient _httpClient;
         public List<Library> Backup { get; private set; }
-        public bool IsBackup => Backup != null && Backup.Count > 0;
+        public bool IsBackup => Backup.Count > 0;
         public LibraryService ()
         {
             _httpClient = new();

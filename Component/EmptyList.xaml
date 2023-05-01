@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="LessonProj.Component.EmptyList"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:LessonProj.Component">
+
+    <Border HorizontalOptions="CenterAndExpand" Style="{StaticResource BlankKey}">
+        <StackLayout HorizontalOptions="Center" Orientation="Vertical">
+            <Label HorizontalTextAlignment="Center" Text="Поточний список є пустим" />
+            <Label HorizontalTextAlignment="Center" Text="Будь ласка оновіть його!" />
+        </StackLayout>
+    </Border>
+
+</ContentView>

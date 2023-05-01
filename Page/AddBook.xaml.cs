@@ -11,9 +11,9 @@ namespace LessonProj.Page
        
         public AddBook (LibraryService libraryService)
         {
-            Modal = new AddBookViewModal(libraryService);
-            BindingContext = Modal;           
             InitializeComponent();
+            Modal = new AddBookViewModal(libraryService);
+            BindingContext = Modal;                   
 #if WINDOWS
             Shell.SetNavBarIsVisible(this, false);
 #endif

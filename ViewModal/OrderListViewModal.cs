@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using LessonProj.Component;
 using LessonProj.Modal;
 using LessonProj.Page;
 using LessonProj.Service;
@@ -9,19 +10,36 @@ namespace LessonProj.ViewModal
 {
     public partial class OrderListViewModal : ObservableObject
     {
-        private OrdersService _ordersService;
-        private IServiceProvider _serviceProvider;
-        public HeaderViewModal HeaderViewModal { get; }      
+        public HeaderViewModal HeaderViewModal { get; }
+        public MoreBtnViewModal MoreBtnViewModal { get; }
         public ObservableCollection<OrdersViewModal> Orders { get; } = new();
         public OrdersViewModal SelectedOrders { get; set; }
 
-        public OrderListViewModal (OrdersService ordersService, IServiceProvider serviceProvider)
+        [ObservableProperty]
+        private bool _showFooter = false;
+
+        private OrdersService _ordersService;
+        private IServiceProvider _serviceProvider;
+        private CollectionView _collectionView;
+        private List<Librarian> librarians = new();
+        private List<Book> books = new();
+        private List<User> users = new();
+        public OrderListViewModal (OrdersService ordersService,
+                                   IServiceProvider serviceProvider, CollectionView collectionView)
         {
+            ShowFooter = false;
             _ordersService = ordersService;
             _serviceProvider = serviceProvider;
+            _collectionView = collectionView;
             var update = new ShowButton("Оновити", new AsyncRelayCommand(GetOrders));
             var add = new ShowButton("Додати", new AsyncRelayCommand(OpenAddOrders));
             HeaderViewModal = new(null, update, add);
+            MoreBtnViewModal = new(new AsyncRelayCommand(GetOrders));
+
+            if (_ordersService.IsBackup)
+            {
+               UpdateOrders(_ordersService.Backup).Wait();              
+            }
         }
 
         [RelayCommand]
@@ -36,40 +54,46 @@ namespace LessonProj.ViewModal
             try
             {
                 var response = await _ordersService.GetOrdersListAsync();
-
-                var bookService = _serviceProvider.GetService<BookService>();
-                var userService = _serviceProvider.GetService<UserService>();
-                var librarianService = _serviceProvider.GetService<LibrarianService>();
-
-                Orders.Clear();
-                foreach (Orders orders in response)
-                {
-                    await bookService.GetBookByUuidAsync(orders.BookUuid);
-                    await librarianService.GetLibrarianByUuidAsync(orders.LibrarianUuid);
-                    await userService.GetUserByUuidAsync(orders.UserUuid);
-
-                    Orders.Add(new OrdersViewModal(orders, bookService, userService, librarianService));
-                }
+                await UpdateOrders(response);
             }
-            catch (Exception ex)
+            catch 
             {
                 await Shell.Current.DisplayAlert("Fail update",
                     "Check network connection or this fail server", "Ok");
-
             }
         }
 
         [RelayCommand]
         public async Task OpenAddOrders ()
         {
-            await Shell.Current.Navigation.PushAsync(new AddOrders());
+            var userService = _serviceProvider.GetService<UserService>();
+            var bookService = _serviceProvider.GetService<BookService>();
+            await Shell.Current.Navigation.PushAsync(new AddOrders(_ordersService, userService, bookService, _serviceProvider));
         }
 
         [RelayCommand]
         public async Task SelectionOrders ()
         {
             await Shell.Current.DisplayAlert("Selected Orders", "Selected Orders", "Ok");
+            _collectionView.SelectedItem = null;
         }
 
+        private async Task UpdateOrders (List<Orders> ordersList)
+        {
+            var bookService = _serviceProvider.GetService<BookService>();
+            var userService = _serviceProvider.GetService<UserService>();
+            var librarianService = _serviceProvider.GetService<LibrarianService>();
+
+            Orders.Clear();
+            foreach (Orders orders in ordersList)
+            {
+                Librarian librarian = await librarianService.GetLibrarianByUuidAsync(orders.LibrarianUuid);
+                Book book = await bookService.GetBookByUuidAsync(orders.BookUuid);
+                User user = await userService.GetUserByUuidAsync(orders.UserUuid);
+
+                Orders.Add(new OrdersViewModal(orders, book.Name, user.Name, librarian.Name));
+            }
+            ShowFooter = true;
+        }
     }
 }

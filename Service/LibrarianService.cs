@@ -15,7 +15,7 @@ namespace LessonProj.Service
         private HttpClient _httpClient;
         public List<Librarian> Backup { get; private set; }
 
-        public bool IsBackup => Backup != null && Backup.Count > 0;
+        public bool IsBackup => Backup.Count > 0;
         public LibrarianService ()
         {
             _httpClient = new();
@@ -30,7 +30,11 @@ namespace LessonProj.Service
 
         public async Task<Librarian> GetLibrarianByUuidAsync (string uuid)
         {
+
             Librarian librarian = new();
+            if (string.IsNullOrWhiteSpace(uuid))
+                return librarian;
+
             if (GetLibrarianByUuid(uuid, out librarian))
             {
                 return librarian;

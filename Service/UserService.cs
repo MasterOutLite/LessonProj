@@ -14,6 +14,7 @@ namespace LessonProj.Service
 
         private HttpClient _httpClient;
         public List<User> Backup { get; private set; }
+        public bool IsBackup => Backup.Count > 0;
 
         public UserService ()
         {

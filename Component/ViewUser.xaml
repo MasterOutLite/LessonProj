@@ -9,12 +9,6 @@
 
     <Border Style="{StaticResource ViewRecord}">
         <StackLayout Orientation="Horizontal" Spacing="8">
-            <Border
-                HeightRequest="90"
-                StrokeShape="RoundRectangle 60"
-                WidthRequest="90">
-                <Image HeightRequest="60" WidthRequest="60" />
-            </Border>
             <StackLayout
                 HorizontalOptions="FillAndExpand"
                 Orientation="Vertical"
@@ -23,7 +17,7 @@
 
                 <StackLayout Orientation="Horizontal" Spacing="10">
                     <Border Style="{StaticResource BlankKey}">
-                        <Label Text="Name" WidthRequest="80" />
+                        <Label Text="UUID" WidthRequest="80" />
                     </Border>
                     <Border Style="{StaticResource BlankValue}">
                         <Label Text="{Binding Uuid}" />
@@ -41,7 +35,7 @@
 
                 <StackLayout Orientation="Horizontal" Spacing="10">
                     <Border Style="{StaticResource BlankKey}">
-                        <Label Text="Author" WidthRequest="80" />
+                        <Label Text="Lastname" WidthRequest="80" />
                     </Border>
                     <Border Style="{StaticResource BlankValue}">
                         <Label Text="{Binding Lastname}" />
@@ -50,7 +44,7 @@
 
                 <StackLayout Orientation="Horizontal" Spacing="10">
                     <Border Style="{StaticResource BlankKey}">
-                        <Label Text="Library" WidthRequest="80" />
+                        <Label Text="Phone" WidthRequest="80" />
                     </Border>
                     <Border Style="{StaticResource BlankValue}">
                         <Label LineBreakMode="TailTruncation" Text="{Binding Phone}" />
@@ -59,7 +53,7 @@
 
                 <StackLayout Orientation="Horizontal" Spacing="10">
                     <Border Style="{StaticResource BlankKey}">
-                        <Label Text="In library" WidthRequest="80" />
+                        <Label Text="Mail" WidthRequest="80" />
                     </Border>
                     <Border Style="{StaticResource BlankValue}">
                         <Label Text="{Binding Mail}" />

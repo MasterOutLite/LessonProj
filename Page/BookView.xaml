@@ -15,10 +15,12 @@
 
             <StackLayout Padding="0,15" Orientation="Vertical">
                 <CollectionView
+                    x:Name="Selection"
                     ItemsSource="{Binding Books}"
                     SelectedItem="{Binding SelectedBook}"
                     SelectionChangedCommand="{Binding SelectionBookCommand}"
                     SelectionMode="Single">
+
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <component:ViewBook />
@@ -26,16 +28,15 @@
                     </CollectionView.ItemTemplate>
 
                     <CollectionView.EmptyView>
-                        <StackLayout Orientation="Vertical">
-                            <Border Style="{StaticResource ViewRecord}">
-                                <StackLayout HorizontalOptions="Center" Orientation="Vertical">
-                                    <Label HorizontalTextAlignment="Center" Text="List is empty" />
-                                    <Label HorizontalTextAlignment="Center" Text="Please update this list" />
-                                </StackLayout>
-                            </Border>
-                        </StackLayout>
+                        <component:EmptyList />
                     </CollectionView.EmptyView>
+
                 </CollectionView>
+
+                <StackLayout HorizontalOptions="CenterAndExpand" IsVisible="{Binding ShowFooter}">
+                    <component:MoreBtn BindingContext="{Binding MoreBtnViewModal}" />
+                </StackLayout>
+
             </StackLayout>
         </StackLayout>
     </ScrollView>

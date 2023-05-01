@@ -8,9 +8,9 @@ namespace LessonProj.Page
         private OrderListViewModal Modal;
         public OrderView (OrdersService ordersService, IServiceProvider serviceProvider)
         {
-            Modal = new OrderListViewModal (ordersService, serviceProvider);
-            BindingContext = Modal;
             InitializeComponent();
+            Modal = new OrderListViewModal (ordersService, serviceProvider,Selection);
+            BindingContext = Modal;            
 #if WINDOWS
             Shell.SetNavBarIsVisible(this, false);
 #endif

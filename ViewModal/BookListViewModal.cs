@@ -11,18 +11,34 @@ namespace LessonProj.ViewModal
     {
         public ObservableCollection<BookViewModal> Books { get; } = new();
         public BookViewModal SelectedBook { get; set; }
-
         public HeaderViewModal HeaderViewModal { get; }
+        public MoreBtnViewModal MoreBtnViewModal { get; }
+
+        [ObservableProperty]
+        private bool _showFooter = false;
 
         private BookService _bookService;
+        private LibraryService _libraryService;
         private IServiceProvider _provider;
-        public BookListViewModal (BookService bookService, IServiceProvider provider)
+        private Action<BookViewModal> _takeBook;
+        private int _page = 1;
+        private List<Library> libraries = new();
+        public BookListViewModal (BookService bookService,
+                                  IServiceProvider provider, Action<BookViewModal> takeBook = null)
         {
             _provider = provider;
+            _takeBook = takeBook;
             _bookService = bookService;
+            _libraryService = _provider.GetService<LibraryService>();
             var update = new ShowButton("Оновити", new AsyncRelayCommand(GetAllBook));
             var add = new ShowButton("Додати", new AsyncRelayCommand(AddBook));
-            HeaderViewModal = new(null, update, add);
+            HeaderViewModal = new(update, add, takeBook != null);
+            MoreBtnViewModal = new(new AsyncRelayCommand(GetMoreBookAsync));
+
+            if (_bookService.IsBackup)
+            {
+                AddBook(_bookService.Backup).Wait(500);
+            }
         }
 
         [RelayCommand]
@@ -36,19 +52,35 @@ namespace LessonProj.ViewModal
 
             try
             {
-                var response = await _bookService.GetBooksAsync();
-
-                var libraryService = _provider.GetService<LibraryService>();
-
+                var response = await _bookService.GetBooksByPageAsync(1, _page * 10);
                 Books.Clear();
-                foreach (Book book in response)
-                {
-                    await libraryService.GetLibraryByUuidAsync(book.LibraryUuid);
-                    Books.Add(new BookViewModal(book, libraryService));
-                }
+                await AddBook(response);
             }
-            catch (Exception ex)
+            catch
             {
+                await Shell.Current.DisplayAlert("Fail update",
+                    "Check network connection or this fail server", "Ok");
+            }
+        }
+
+        [RelayCommand]
+        public async Task GetMoreBookAsync ()
+        {
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+            {
+                await Shell.Current.DisplayAlert("Network Error", "Check network connection!", "Ok");
+                return;
+            }
+
+            try
+            {
+                _page++;
+                var response = await _bookService.GetBooksByPageAsync(_page);
+                await AddBook(response);
+            }
+            catch
+            {
+                _page--;
                 await Shell.Current.DisplayAlert("Fail update",
                     "Check network connection or this fail server", "Ok");
             }
@@ -64,12 +96,38 @@ namespace LessonProj.ViewModal
         [RelayCommand]
         public async Task SelectionBook ()
         {
-            if (SelectedBook != null)
-                await Shell.Current.DisplayAlert("SelectionBook", $"SelectionBook. Selected Name: {SelectedBook.Book}. Library: {SelectedBook.LibraryName}", "Ok");
-            else
-                await Shell.Current.DisplayAlert("SelectionBook", $"SelectionBook. Select null", "Ok");
+            if (_takeBook != null)
+            {
+                _takeBook?.Invoke(SelectedBook);
+                await Shell.Current.Navigation.PopAsync();
+            }
 
             SelectedBook = null;
+        }
+
+        private async Task<string> GetLibraryNameAsync (string libraryUuid)
+        {
+            if (FindLocalLibrary(libraryUuid, out var library))
+                return library.Name;
+            library = await _libraryService.GetLibraryByUuidAsync(libraryUuid);
+            libraries.Add(library);
+            return library.Name;
+        }
+
+        private async Task AddBook (List<Book> booksList)
+        {
+            foreach (Book book in booksList)
+            {
+                string nameLibrary = await GetLibraryNameAsync(book.LibraryUuid);
+                Books.Add(new BookViewModal(book, nameLibrary));
+            }
+            ShowFooter = true;
+        }
+
+        private bool FindLocalLibrary (string libraryUuid, out Library library)
+        {
+            library = libraries.Find(librarie => librarie.Uuid.Contains(libraryUuid));
+            return library != null;
         }
     }
 }

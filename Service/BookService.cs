@@ -14,7 +14,7 @@ namespace LessonProj.Service
 
         private HttpClient _httpClient;
         public List<Book> Backup { get; private set; }
-
+        public bool IsBackup => Backup.Count > 0;
         public BookService ()
         {
             Backup = new List<Book>();
@@ -68,6 +68,32 @@ namespace LessonProj.Service
             }
 
             return Backup;
+        }
+
+        public async Task<List<Book>> GetBooksByPageAsync (int page, int amount = 10)
+        {
+            List<Book> books = new List<Book>();
+            var response = await _httpClient.GetAsync($"{_path}/all?page={page}&&amount={amount}");
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    books = await response.Content.ReadFromJsonAsync<List<Book>>();
+                    Backup.AddRange(books);
+                }
+                catch
+                {
+                }
+            }
+            else
+            {
+                var exception = await response.Content.ReadFromJsonAsync<ExceptionMsg>();
+                await Shell.Current.DisplayAlert("Get all books",
+                    $"Failed to get all books. Code: {exception.Code}. Msg: {exception.Msg}",
+                    "Ok");
+            }
+
+            return books;
         }
 
         public async void PostBook (Book book)

@@ -2,7 +2,6 @@
 using CommunityToolkit.Mvvm.Input;
 using LessonProj.Modal;
 using LessonProj.Service;
-using MvvmHelpers.Commands;
 using System.Collections.ObjectModel;
 
 namespace LessonProj.ViewModal
@@ -10,11 +9,11 @@ namespace LessonProj.ViewModal
     public partial class AddBookViewModal : ObservableObject
     {
         public HeaderViewModal HeaderModal { get; }
-        public Book Book { get;  } = new Book();
+        public Book Book { get; } = new Book();
 
         public ObservableCollection<string> GenreList { get; }
 
-        public ObservableCollection<string> LibraryList { get;  }
+        public ObservableCollection<string> LibraryList { get; }
 
         [ObservableProperty]
         private int _selectLibraryIndex = -1;
@@ -30,19 +29,19 @@ namespace LessonProj.ViewModal
             GenreList = new ObservableCollection<string> { "Roman", "History", "Fantasi" };
             LibraryList = new ObservableCollection<string>();
             var add = new ShowButton("Додати", new AsyncRelayCommand(PostBook));
-            HeaderModal = new HeaderViewModal(new ShowButton(),null, add);                
+            HeaderModal = new HeaderViewModal(add, true);
             Book.InLibrary = true;
-            GetLibrary();
+            GetLibrary().Wait();
         }
 
-        public async void GetLibrary ()
+        public async Task GetLibrary ()
         {
             try
             {
                 if (!_libraryService.IsBackup)
                     await _libraryService.GetLibraryAsync();
             }
-            catch (Exception ex)
+            catch 
             {
                 await Shell.Current.DisplayAlert("Get Library fail",
                    "Error connection to server.",
@@ -66,7 +65,7 @@ namespace LessonProj.ViewModal
                     "Ok");
                 return;
             }
-               
+
 
             Library selectLibrary = _libraryList[SelectLibraryIndex];
             Book.LibraryUuid = selectLibrary.Name;

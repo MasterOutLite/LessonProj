@@ -1,5 +1,6 @@
 ﻿using LessonProj.Modal;
 using Newtonsoft.Json;
+using System.Diagnostics;
 using System.Net.Http.Json;
 
 namespace LessonProj.Service
@@ -15,6 +16,7 @@ namespace LessonProj.Service
 
         private HttpClient _httpClient;
         public List<Orders> Backup { get; private set; }
+        public bool IsBackup => Backup.Count > 0;
         public OrdersService ()
         {
             Backup = new();
@@ -48,7 +50,7 @@ namespace LessonProj.Service
             return Backup;
         }
 
-        public async Task PostOrdersAsync (Orders orders)
+        public async Task PostOrdersAsync (PostOrders orders)
         {
             if (orders == null)
                 return;
@@ -60,6 +62,7 @@ namespace LessonProj.Service
                 await Shell.Current.DisplayAlert("Post Library",
                     $"Failed post Library. Code: {exception.Code}. Msg: {exception.Msg}",
                     "Ok");
+                Debug.WriteLine(exception.Msg);
             }
         }
     }

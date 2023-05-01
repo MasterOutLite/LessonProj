@@ -10,12 +10,7 @@
 
     <Border Style="{StaticResource ViewRecord}">
         <StackLayout Orientation="Horizontal" Spacing="10">
-            <Border
-                HeightRequest="90"
-                StrokeShape="RoundRectangle 60"
-                WidthRequest="90">
-                <Image HeightRequest="60" WidthRequest="60" />
-            </Border>
+
             <StackLayout
                 HorizontalOptions="FillAndExpand"
                 Orientation="Vertical"

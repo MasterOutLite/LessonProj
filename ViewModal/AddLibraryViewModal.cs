@@ -14,7 +14,7 @@ namespace LessonProj.ViewModal
         public AddLibraryViewModal (LibraryService librarianService)
         {
             var add = new ShowButton("Додати", new AsyncRelayCommand(PostLibraryAsync));
-            HeaderViewModal = new(new ShowButton(), null, add);
+            HeaderViewModal = new(add, true);
             _libraryService = librarianService;
         }
 

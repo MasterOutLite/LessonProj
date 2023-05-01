@@ -5,27 +5,27 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:component="clr-namespace:LessonProj.Component"
     xmlns:local="clr-namespace:LessonProj.Page"
+    xmlns:viewModal="clr-namespace:LessonProj.ViewModal"
+    x:DataType="viewModal:AddOrdersViewModal"
     Shell.NavBarIsVisible="True">
     <ScrollView>
-        <StackLayout
-            Orientation="Vertical"
-            Style="{StaticResource AppBack}"
-            VerticalOptions="FillAndExpand">
+        <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
 
-            <component:Header x:Name="Header" />
+            <component:Header BindingContext="{Binding HeaderModal}" />
 
-            <Frame
+            <Border
                 Margin="10"
                 Padding="20"
                 MaximumWidthRequest="600"
-                Style="{StaticResource Wall}"
+                Style="{StaticResource ViewRecord}"
                 VerticalOptions="CenterAndExpand">
 
                 <StackLayout Orientation="Vertical" Spacing="15">
 
-                    <StackLayout Orientation="Vertical">
+                    <StackLayout Orientation="Vertical" Spacing="8">
                         <StackLayout Orientation="Horizontal">
                             <Label
+                                Padding="6"
                                 FontSize="Medium"
                                 Style="{StaticResource SubTitle}"
                                 Text="Name Book" />
@@ -34,73 +34,29 @@
                                 HorizontalOptions="EndAndExpand"
                                 Orientation="Horizontal"
                                 Spacing="10"
-                                VerticalOptions="Center">
+                                VerticalOptions="CenterAndExpand">
                                 <Button
-                                    Padding="5"
+                                    Command="{Binding ClearBookCommand}"
                                     Style="{StaticResource CustonButtonRed}"
                                     Text="Delete" />
                                 <Button
-                                    Padding="10,5"
+                                    Command="{Binding TakeBookCommand}"
                                     Style="{StaticResource CustonButtonOrange}"
                                     Text="Edit" />
                             </StackLayout>
                         </StackLayout>
-                        <!--<Frame
-                            Padding="0"
-                            BorderColor="{StaticResource CustomDark}"
-                            CornerRadius="8">
-                            <Entry
-                                x:Name="Name"
-                                IsReadOnly="True"
-                                Placeholder="Name"
-                                Style="{StaticResource Key=CustomEntry}" />
-                        </Frame>-->
 
-                        <Frame
-                            Margin="0,10"
-                            Padding="10,5"
-                            HorizontalOptions="FillAndExpand">
-                            <StackLayout
-                                HorizontalOptions="Fill"
-                                Orientation="Horizontal"
-                                Spacing="10">
-                                <Frame CornerRadius="60" HorizontalOptions="Start">
-                                    <Image HeightRequest="60" WidthRequest="60" />
-                                </Frame>
-
-                                <StackLayout
-                                    HorizontalOptions="Start"
-                                    Orientation="Horizontal"
-                                    Spacing="15"
-                                    VerticalOptions="Center">
-
-                                    <StackLayout Orientation="Vertical">
-                                        <Label Text="Name book" />
-                                        <Label Text="{Binding Name}" />
-                                    </StackLayout>
-                                    <StackLayout Orientation="Vertical">
-                                        <Label Text="Author" />
-                                        <Label Text="{Binding Author}" />
-                                    </StackLayout>
-                                </StackLayout>
+                        <Border Style="{StaticResource Selected}">
+                            <StackLayout IsVisible="{Binding ShowBook}" Orientation="Vertical">
+                                <component:ViewBook BindingContext="{Binding Book}" />
                             </StackLayout>
-                        </Frame>
+                        </Border>
                     </StackLayout>
 
-                    <StackLayout Orientation="Vertical">
-                        <Picker
-                            x:Name="GenrePicker"
-                            Title="Select Library"
-                            HorizontalOptions="Fill"
-                            ItemsSource="{Binding GenreList}"
-                            MaximumWidthRequest="300"
-                            MinimumWidthRequest="200"
-                            Style="{StaticResource Select}" />
-                    </StackLayout>
-
-                    <StackLayout Orientation="Vertical">
+                    <StackLayout Orientation="Vertical" Spacing="8">
                         <StackLayout Orientation="Horizontal">
                             <Label
+                                Padding="6"
                                 FontSize="Medium"
                                 Style="{StaticResource SubTitle}"
                                 Text="Customers"
@@ -109,60 +65,36 @@
                                 HorizontalOptions="EndAndExpand"
                                 Orientation="Horizontal"
                                 Spacing="10"
-                                VerticalOptions="Center">
+                                VerticalOptions="CenterAndExpand">
                                 <Button
                                     Padding="5"
+                                    Command="{Binding ClearUserCommand}"
                                     Style="{StaticResource CustonButtonRed}"
                                     Text="Delete" />
                                 <Button
                                     Padding="10,5"
+                                    Command="{Binding TakeUserCommand}"
                                     Style="{StaticResource CustonButtonOrange}"
                                     Text="Edit" />
                             </StackLayout>
                         </StackLayout>
-                        <Frame
-                            Margin="0,10"
-                            Padding="10,5"
-                            HorizontalOptions="FillAndExpand">
-                            <StackLayout
-                                HorizontalOptions="Fill"
-                                Orientation="Horizontal"
-                                Spacing="10">
-                                <Frame CornerRadius="60" HorizontalOptions="Start">
-                                    <Image HeightRequest="60" WidthRequest="60" />
-                                </Frame>
-
-                                <StackLayout
-                                    HorizontalOptions="Start"
-                                    Orientation="Horizontal"
-                                    Spacing="15"
-                                    VerticalOptions="Center">
-
-                                    <StackLayout Orientation="Vertical">
-                                        <Label Text="UUID" />
-                                        <Label Text="{Binding Name}" />
-                                        <Label Text="Phone" />
-                                        <Label Text="{Binding Author}" />
-                                    </StackLayout>
-                                    <StackLayout Orientation="Vertical">
-                                        <Label Text="Name" />
-                                        <Label Text="{Binding Name}" />
-                                        <Label Text="LastName" />
-                                        <Label Text="{Binding Author}" />
-                                    </StackLayout>
-
-                                </StackLayout>
+                        <Border Style="{StaticResource Selected}">
+                            <StackLayout IsVisible="{Binding ShowUser}" Orientation="Vertical">
+                                <component:ViewUser BindingContext="{Binding User}" />
                             </StackLayout>
-                        </Frame>
+                        </Border>
                     </StackLayout>
+
                     <Button
-                        x:Name="AddBookBtn"
                         Padding="0,15"
+                        Command="{Binding PostOrdersCommand}"
                         HorizontalOptions="FillAndExpand"
                         Style="{StaticResource CustonButtonBlue}"
-                        Text="Add Orders" />
+                        Text="Додати замовлення" />
+
                 </StackLayout>
-            </Frame>
+            </Border>
+
         </StackLayout>
     </ScrollView>
 </ContentPage>

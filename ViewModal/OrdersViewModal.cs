@@ -18,25 +18,12 @@ namespace LessonProj.ViewModal
         private BookService _bookService;
         private UserService _userService;
         private LibrarianService _librarianService;
-        public OrdersViewModal (Orders orders, BookService bookService,
-            UserService userService, LibrarianService librarianService)
+        public OrdersViewModal (Orders orders, string userName,string bookName, string librarianName)
         {
             Orders = orders;     
-            _bookService = bookService;
-            _userService = userService;
-            _librarianService = librarianService;
-            GetProperty();
-        }
-
-        private async void GetProperty ()
-        {
-            var book = await _bookService.GetBookByUuidAsync(Orders.BookUuid);
-            var user = await _userService.GetUserByUuidAsync(Orders.UserUuid);
-            var librarian = await _librarianService.GetLibrarianByUuidAsync(Orders.LibrarianUuid);
-
-            BookName = book.Name;
-            UserName = user.Name;
-            LibrarianName = librarian.Name;            
-        }
+            UserName = userName;
+            BookName = bookName;
+            LibrarianName = librarianName;
+        }       
     }
 }

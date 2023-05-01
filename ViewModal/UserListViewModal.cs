@@ -12,45 +12,52 @@ namespace LessonProj.ViewModal
 
         public ObservableCollection<User> Users { get; } = new();
         public HeaderViewModal HeaderViewModal { get; }
+        public MoreBtnViewModal MoreBtnViewModal { get; }
         public User SelectedUser { get; set; }
         public CollectionView Selection { get; }
 
         [ObservableProperty]
         private string _findString;
+        [ObservableProperty]
+        private bool _showFooter = false;
 
         private UserService _userService;
         private Action<User> _takeUser;
-        public UserListViewModal (UserService userService, CollectionView collectionView)
-        {
+        public UserListViewModal (UserService userService, 
+                                  CollectionView collectionView, Action<User> takeUser = null)
+        {            
             _userService = userService;
             Selection = collectionView;
+            _takeUser = takeUser;
             var update = new ShowButton("Оновити", new AsyncRelayCommand(GetAllUser));
             var add = new ShowButton("Додати", new AsyncRelayCommand(OpenAddUser));
-            HeaderViewModal = new(null, update, add);
-        }
+            HeaderViewModal = new(update, add, takeUser != null);
+            MoreBtnViewModal = new(new AsyncRelayCommand(GetAllUser));
 
-        public UserListViewModal (UserService userService, Action<User> takeUser)
-        {
-            _userService = userService;
-            _takeUser = takeUser;
-        }
+            if (_userService.IsBackup)
+            {
+                UpdateUser(_userService.Backup);
+            }
+        }     
 
         [RelayCommand]
         public async Task GetAllUser ()
         {
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+            {
+                await Shell.Current.DisplayAlert("Network Error", "Check network connection!", "Ok");
+                return;
+            }
+
             try
             {
                 var response = await _userService.GetUsersAsync();
-
-                Users.Clear();
-                foreach (var user in response)
-                    Users.Add(user);
+                UpdateUser(response);
             }
-            catch (Exception ex)
+            catch 
             {
                 await Shell.Current.DisplayAlert("Fail update",
                     "Check network connection or this fail server", "Ok");
-
             }
         }
 
@@ -69,9 +76,15 @@ namespace LessonProj.ViewModal
                 _takeUser.Invoke(SelectedUser);
                 await Shell.Current.Navigation.PopAsync();
             }
-
-            await Shell.Current.DisplayAlert("SelectionUser", $"SelectionUser.", "Ok");
             Selection.SelectedItem = null;
         }
+
+        private void UpdateUser(List<User> usersList)
+        {
+            Users.Clear();
+            foreach (var user in usersList)
+                Users.Add(user);
+            ShowFooter = true;
+        }        
     }
 }

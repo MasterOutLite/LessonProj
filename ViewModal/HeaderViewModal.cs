@@ -15,9 +15,28 @@ namespace LessonProj.ViewModal
             Preview = preview;
             Update = update;
             Add = add;
-            if (Preview != null)
-                Preview = new ShowButton("Назад", new AsyncRelayCommand(ToPrevious));
+        }
 
+        public HeaderViewModal (ShowButton update, ShowButton add, bool showPreview = false)
+        {
+            Update = update;
+            Add = add;
+            if (showPreview)
+                Preview = new ShowButton("Назад", new AsyncRelayCommand(ToPrevious));
+        }
+
+        public HeaderViewModal (ShowButton add, bool showPreview = false)
+        {
+            Add = add;
+            if (showPreview)
+                Preview = new ShowButton("Назад", new AsyncRelayCommand(ToPrevious));
+        }
+
+        public HeaderViewModal (bool showPreview, ShowButton update)
+        {
+            Update = update;
+            if (showPreview)
+                Preview = new ShowButton("Назад", new AsyncRelayCommand(ToPrevious));
         }
 
         [RelayCommand]
@@ -36,9 +55,6 @@ namespace LessonProj.ViewModal
         {
             Title = title;
             Command = command;
-        }
-        public ShowButton ()
-        {
         }
     }
 }

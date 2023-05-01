@@ -8,9 +8,9 @@ namespace LessonProj.Page
         private AddLibraryViewModal Modal;
         public AddLibrary(LibraryService librarianService)
         {
-            Modal = new AddLibraryViewModal(librarianService);
-            BindingContext = Modal;
             InitializeComponent();
+            Modal = new AddLibraryViewModal(librarianService);
+            BindingContext = Modal;           
 #if WINDOWS
             Shell.SetNavBarIsVisible(this, false);
 #endif
