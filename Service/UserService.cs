@@ -5,20 +5,16 @@ namespace LessonProj.Service
 {
     public class UserService
     {
-
-#if WINDOWS
-        private const string _path = "http://localhost:8080/user";
-#else 
-        private const string _path = "http://192.168.31.100:8080/user";
-#endif
+        private readonly string _path;
 
         private HttpClient _httpClient;
         public List<User> Backup { get; private set; }
         public bool IsBackup => Backup.Count > 0;
 
-        public UserService ()
+        public UserService (PropertyService propertyService)
         {
-            _httpClient = new();
+            _path = propertyService.URL + "/user";
+            _httpClient = propertyService.HttpClient;
             Backup = new();
         }
 

@@ -5,7 +5,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:LessonProj.Component">
 
-    <Border HorizontalOptions="CenterAndExpand" Style="{StaticResource BlankKey}">
+    <Border
+        Margin="30"
+        HorizontalOptions="CenterAndExpand"
+        Style="{StaticResource BlankKey}"
+        VerticalOptions="Start">
         <StackLayout HorizontalOptions="Center" Orientation="Vertical">
             <Label HorizontalTextAlignment="Center" Text="Поточний список є пустим" />
             <Label HorizontalTextAlignment="Center" Text="Будь ласка оновіть його!" />

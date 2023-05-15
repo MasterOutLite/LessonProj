@@ -23,28 +23,28 @@
                 <StackLayout Orientation="Vertical" Spacing="15">
 
                     <StackLayout Orientation="Vertical">
-                        <Label Style="{StaticResource SubTitle}" Text="Name library" />
+                        <Label Style="{StaticResource SubTitle}" Text="Назва бібліотеки" />
                         <Frame
                             Padding="0"
                             BorderColor="{StaticResource CustomDark}"
                             CornerRadius="8">
                             <Entry
                                 x:Name="NameLibrary"
-                                Placeholder="Name"
+                                Placeholder="Назва бібліотеки"
                                 Style="{StaticResource Key=CustomEntry}"
                                 Text="{Binding Library.Name}" />
                         </Frame>
                     </StackLayout>
 
                     <StackLayout Orientation="Vertical">
-                        <Label Style="{StaticResource SubTitle}" Text="Address" />
+                        <Label Style="{StaticResource SubTitle}" Text="Адреса" />
                         <Frame
                             Padding="0"
                             BorderColor="{StaticResource CustomDark}"
                             CornerRadius="8">
                             <Entry
                                 x:Name="Address"
-                                Placeholder="Address"
+                                Placeholder="Адреса"
                                 Style="{StaticResource Key=CustomEntry}"
                                 Text="{Binding Library.Address}" />
                         </Frame>
@@ -56,7 +56,7 @@
                         Command="{Binding PostLibraryCommand}"
                         HorizontalOptions="FillAndExpand"
                         Style="{StaticResource CustonButtonBlue}"
-                        Text="Add User" />
+                        Text="Додати" />
                 </StackLayout>
             </Frame>
         </StackLayout>

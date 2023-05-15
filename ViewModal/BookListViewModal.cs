@@ -10,6 +10,7 @@ namespace LessonProj.ViewModal
     public partial class BookListViewModal : ObservableObject
     {
         public ObservableCollection<BookViewModal> Books { get; } = new();
+        private List<Book> _books { get; } = new();
         public BookViewModal SelectedBook { get; set; }
         public HeaderViewModal HeaderViewModal { get; }
         public MoreBtnViewModal MoreBtnViewModal { get; }
@@ -90,7 +91,7 @@ namespace LessonProj.ViewModal
         public async Task AddBook ()
         {
             var service = _provider.GetService<LibraryService>();
-            await Shell.Current.Navigation.PushAsync(new AddBook(service));
+            await Shell.Current.Navigation.PushAsync(new AddBook(service, _bookService));
         }
 
         [RelayCommand]
@@ -103,6 +104,25 @@ namespace LessonProj.ViewModal
             }
 
             SelectedBook = null;
+        }
+
+        [RelayCommand]
+        public async void SearchBookByName (string name)
+        {
+            name = name.ToLower();
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                await SetBook(_books);
+                return;
+            }
+            var search = _books.FindAll(book => book.Name.ToLower().Contains(name));
+            await SetBook(search);
+        }
+
+        [RelayCommand]
+        public void SearchAll ()
+        {
+             SearchBookByName("");
         }
 
         private async Task<string> GetLibraryNameAsync (string libraryUuid)
@@ -119,9 +139,20 @@ namespace LessonProj.ViewModal
             foreach (Book book in booksList)
             {
                 string nameLibrary = await GetLibraryNameAsync(book.LibraryUuid);
+                _books.Add(book);
                 Books.Add(new BookViewModal(book, nameLibrary));
             }
             ShowFooter = true;
+        }
+
+        private async Task SetBook (List<Book> booksList)
+        {
+            Books.Clear();
+            foreach (Book book in booksList)
+            {
+                string nameLibrary = await GetLibraryNameAsync(book.LibraryUuid);
+                Books.Add(new BookViewModal(book, nameLibrary));
+            }            
         }
 
         private bool FindLocalLibrary (string libraryUuid, out Library library)

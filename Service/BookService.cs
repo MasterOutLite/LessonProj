@@ -5,20 +5,16 @@ namespace LessonProj.Service
 {
     public class BookService
     {
-
-#if WINDOWS
-        private const string _path = "http://localhost:8080/book";
-#else 
-        private const string _path = "http://192.168.31.100:8080/book";
-#endif
+        private readonly string _path;
 
         private HttpClient _httpClient;
         public List<Book> Backup { get; private set; }
         public bool IsBackup => Backup.Count > 0;
-        public BookService ()
+        public BookService (PropertyService propertyService)
         {
-            Backup = new List<Book>();
-            _httpClient = new HttpClient();
+            _path = propertyService.URL + "/book";
+            _httpClient = propertyService.HttpClient;
+            Backup = new List<Book>();           
         }
 
         public bool GetBookByUuid (string uuid, out Book book)
@@ -96,7 +92,7 @@ namespace LessonProj.Service
             return books;
         }
 
-        public async void PostBook (Book book)
+        public async Task PostBookAsync (Book book)
         {
             if (book == null)
                 return;

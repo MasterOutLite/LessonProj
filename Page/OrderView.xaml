@@ -14,13 +14,8 @@
 
             <component:Header BindingContext="{Binding HeaderViewModal}" />
 
-            <StackLayout Padding="0,15" Orientation="Vertical">
-                <CollectionView
-                    x:Name="Selection"
-                    ItemsSource="{Binding Orders}"
-                    SelectedItem="{Binding SelectedOrders}"
-                    SelectionChangedCommand="{Binding SelectionOrdersCommand}"
-                    SelectionMode="Single">
+            <StackLayout Padding="15,15" Orientation="Vertical">
+                <CollectionView x:Name="Selection" ItemsSource="{Binding Orders}">
 
                     <CollectionView.ItemTemplate>
                         <DataTemplate>

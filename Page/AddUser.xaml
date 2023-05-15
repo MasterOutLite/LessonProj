@@ -24,79 +24,79 @@
                 <StackLayout Orientation="Vertical" Spacing="15">
 
                     <StackLayout Orientation="Vertical">
-                        <Label Style="{StaticResource SubTitle}" Text="Name" />
+                        <Label Style="{StaticResource SubTitle}" Text="Ім'я" />
                         <Frame
                             Padding="0"
                             BorderColor="{StaticResource CustomDark}"
                             CornerRadius="8">
                             <Entry
-                                Placeholder="Name"
+                                Placeholder="Ім'я"
                                 Style="{StaticResource CustomEntry}"
                                 Text="{Binding User.Name}" />
                         </Frame>
                     </StackLayout>
 
                     <StackLayout Orientation="Vertical">
-                        <Label Style="{StaticResource SubTitle}" Text="LastName" />
+                        <Label Style="{StaticResource SubTitle}" Text="Прізвище" />
                         <Frame
                             Padding="0"
                             BorderColor="{StaticResource CustomDark}"
                             CornerRadius="8">
                             <Entry
-                                Placeholder="LastName"
+                                Placeholder="Прізвище"
                                 Style="{StaticResource CustomEntry}"
                                 Text="{Binding User.Lastname}" />
                         </Frame>
                     </StackLayout>
 
                     <StackLayout Orientation="Vertical">
-                        <Label Style="{StaticResource SubTitle}" Text="Phone" />
+                        <Label Style="{StaticResource SubTitle}" Text="Номер телефону" />
                         <Frame
                             Padding="0"
                             BorderColor="{StaticResource CustomDark}"
                             CornerRadius="8">
                             <Entry
-                                Placeholder="Phone"
+                                Placeholder="Номер телефону"
                                 Style="{StaticResource CustomEntry}"
                                 Text="{Binding User.Phone}" />
                         </Frame>
                     </StackLayout>
 
                     <StackLayout Orientation="Vertical">
-                        <Label Style="{StaticResource SubTitle}" Text="Mail" />
+                        <Label Style="{StaticResource SubTitle}" Text="Електронна адреса" />
                         <Frame
                             Padding="0"
                             BorderColor="{StaticResource CustomDark}"
                             CornerRadius="8">
                             <Entry
-                                Placeholder="Mail"
+                                Placeholder="Електронна адреса"
                                 Style="{StaticResource CustomEntry}"
                                 Text="{Binding User.Mail}" />
                         </Frame>
                     </StackLayout>
 
                     <StackLayout Orientation="Vertical">
-                        <Label Style="{StaticResource SubTitle}" Text="Login" />
+                        <Label Style="{StaticResource SubTitle}" Text="Логін" />
                         <Frame
                             Padding="0"
                             BorderColor="{StaticResource CustomDark}"
                             CornerRadius="8">
                             <Entry
-                                Placeholder="Login Min 5"
+                                Placeholder="Логін(мінімум 5 символів)"
                                 Style="{StaticResource CustomEntry}"
                                 Text="{Binding User.Login}" />
                         </Frame>
                     </StackLayout>
 
                     <StackLayout Orientation="Vertical">
-                        <Label Style="{StaticResource SubTitle}" Text="Password" />
+                        <Label Style="{StaticResource SubTitle}" Text="Пароль" />
                         <Frame
                             Padding="0"
                             BorderColor="{StaticResource CustomDark}"
                             CornerRadius="8">
                             <Entry
                                 IsPassword="True"
-                                Placeholder="Password Min 6"
+                                Placeholder="Пароль(мінімум 6 символів)"
                                 Style="{StaticResource CustomEntry}"
                                 Text="{Binding User.Password}" />
                         </Frame>
@@ -107,7 +107,7 @@
                         Command="{Binding PostUserCommand}"
                         HorizontalOptions="FillAndExpand"
                         Style="{StaticResource CustonButtonBlue}"
-                        Text="Add User" />
+                        Text="Додати" />
                 </StackLayout>
             </Frame>
         </StackLayout>

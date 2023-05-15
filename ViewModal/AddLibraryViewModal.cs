@@ -27,8 +27,7 @@ namespace LessonProj.ViewModal
                     "No information was entered in some fields",
                     "Ok");
                 return;
-            }
-                
+            }                
 
             if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
@@ -37,6 +36,7 @@ namespace LessonProj.ViewModal
             }
 
             await _libraryService.PostLibraryAsync(Library);
+            await Shell.Current.Navigation.PopAsync();
         }
     }
 }

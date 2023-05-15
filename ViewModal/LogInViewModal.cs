@@ -31,7 +31,6 @@ namespace LessonProj.ViewModal
             }
 
             var auth = await _librarianService.CheckAuth(new RequestAuth(Login, Password));
-            await Shell.Current.DisplayAlert("Auth", $"token: {auth.Token}|. IsSuccess: {auth.IsSuccess}. UUID: {auth.Uuid}", "Ok");
             if (auth.IsSuccess)
                 await Shell.Current.GoToAsync("//BookView");
 

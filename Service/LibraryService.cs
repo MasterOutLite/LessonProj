@@ -6,20 +6,17 @@ namespace LessonProj.Service
 {
     public class LibraryService
     {
-
-#if WINDOWS
-        private const string _path = "http://localhost:8080/library";
-#else
-        private const string _path = "http://192.168.31.100:8080/library";
-#endif
+        private readonly string _path;     
 
         private HttpClient _httpClient;
         public List<Library> Backup { get; private set; }
         public bool IsBackup => Backup.Count > 0;
-        public LibraryService ()
-        {
-            _httpClient = new();
-            Backup = new();           
+        public LibraryService (PropertyService propertyService)
+        {           
+            _path = propertyService.URL + "/library";
+            _httpClient = propertyService.HttpClient;
+            Backup = new();
+            GetLibraryAsync().Wait(500);
         }
 
         public bool GetLibraryByUuid (string uuid, out Library library)

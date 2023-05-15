@@ -39,6 +39,7 @@ namespace LessonProj.ViewModal
             }
 
             await _userService.PostUserAsync(User);
+            await Shell.Current.Navigation.PopAsync();           
         }
     }
 }

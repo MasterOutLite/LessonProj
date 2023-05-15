@@ -3,7 +3,7 @@ using Android.Runtime;
 
 namespace LessonProj;
 
-//[Application]                               
+// android:networkSecurityConfig="@xml/network_security_config"                             
 [Application(UsesCleartextTraffic = true)]  
 public class MainApplication : MauiApplication
 {

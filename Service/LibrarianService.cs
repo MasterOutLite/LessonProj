@@ -1,27 +1,20 @@
 ﻿using LessonProj.Modal;
-using Newtonsoft.Json;
 using System.Net.Http.Json;
-using System.Net.Mime;
-using System.Text;
 
 namespace LessonProj.Service
 {
     public class LibrarianService
     {
-
-#if WINDOWS
-        private const string _path = "http://localhost:8080/librarian";
-#else
-        private const string _path = "http://192.168.31.100:8080/librarian";
-#endif
+        private readonly string _path;
 
         private HttpClient _httpClient;
         public List<Librarian> Backup { get; private set; }
 
         public bool IsBackup => Backup.Count > 0;
-        public LibrarianService ()
+        public LibrarianService (PropertyService propertyService)
         {
-            _httpClient = new();
+            _path = propertyService.URL + "/librarian";
+            _httpClient = propertyService.HttpClient;
             Backup = new();
         }
 
@@ -35,16 +28,8 @@ namespace LessonProj.Service
         {
             ResponseAuth responseAuth = new ResponseAuth();
 
-            string requestJson = JsonConvert.SerializeObject(auth);
+            var response = await _httpClient.PostAsJsonAsync($"{_path}/login", auth);
 
-            var request = new HttpRequestMessage
-            {
-                Method = HttpMethod.Get,
-                RequestUri = new Uri($"{_path}/login"),
-                Content = new StringContent(requestJson, Encoding.UTF8, "application/json"),
-            };
-            var response = await _httpClient.SendAsync(request);
-            
             if (response.IsSuccessStatusCode)
             {
                 responseAuth = await response.Content.ReadFromJsonAsync<ResponseAuth>();

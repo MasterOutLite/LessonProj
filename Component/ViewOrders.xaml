@@ -8,64 +8,111 @@
     x:DataType="viewModal:OrdersViewModal">
 
     <Border Style="{StaticResource ViewRecord}">
-        <StackLayout Orientation="Vertical" Spacing="6">
+        <Grid
+            ColumnSpacing="4"
+            HorizontalOptions="FillAndExpand"
+            RowSpacing="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
 
+            <Border
+                Grid.Row="0"
+                Grid.Column="0"
+                Style="{StaticResource BlankKey}">
+                <Label Text="UUID" />
+            </Border>
+            <Border
+                Grid.Row="0"
+                Grid.Column="1"
+                Style="{StaticResource BlankValue}">
+                <Label LineBreakMode="TailTruncation" Text="{Binding Orders.Uuid}" />
+            </Border>
 
-            <StackLayout Orientation="Horizontal" Spacing="15">
-                <Border Style="{StaticResource BlankKey}">
-                    <Label Text="UUID" WidthRequest="100" />
-                </Border>
-                <Border Style="{StaticResource BlankValue}">
-                    <Label LineBreakMode="TailTruncation" Text="{Binding Orders.Uuid}" />
-                </Border>
-            </StackLayout>
+            <Border
+                Grid.Row="1"
+                Grid.Column="0"
+                Style="{StaticResource BlankKey}">
+                <Label Text="Назва книги" />
+            </Border>
+            <Border
+                Grid.Row="1"
+                Grid.Column="1"
+                Style="{StaticResource BlankValue}">
+                <Label LineBreakMode="TailTruncation" Text="{Binding BookName}" />
+            </Border>
 
-            <StackLayout Orientation="Horizontal" Spacing="15">
-                <Border Style="{StaticResource BlankKey}">
-                    <Label Text="BookName" WidthRequest="100" />
-                </Border>
-                <Border Style="{StaticResource BlankValue}">
-                    <Label LineBreakMode="TailTruncation" Text="{Binding BookName}" />
-                </Border>
-            </StackLayout>
+            <Border
+                Grid.Row="2"
+                Grid.Column="0"
+                Style="{StaticResource BlankKey}">
+                <Label Text="Бібліотекар" />
+            </Border>
+            <Border
+                Grid.Row="2"
+                Grid.Column="1"
+                Style="{StaticResource BlankValue}">
+                <Label LineBreakMode="TailTruncation" Text="{Binding LibrarianName}" />
+            </Border>
 
-            <StackLayout Orientation="Horizontal" Spacing="15">
-                <Border Style="{StaticResource BlankKey}">
-                    <Label Text="LibrarianName" WidthRequest="100" />
-                </Border>
-                <Border Style="{StaticResource BlankValue}">
-                    <Label LineBreakMode="TailTruncation" Text="{Binding LibrarianName}" />
-                </Border>
-            </StackLayout>
+            <Border
+                Grid.Row="3"
+                Grid.Column="0"
+                Style="{StaticResource BlankKey}">
+                <Label Text="Користувача" />
+            </Border>
+            <Border
+                Grid.Row="3"
+                Grid.Column="1"
+                Style="{StaticResource BlankValue}">
+                <Label LineBreakMode="TailTruncation" Text="{Binding UserName}" />
+            </Border>
 
-            <StackLayout Orientation="Horizontal" Spacing="15">
-                <Border Style="{StaticResource BlankKey}">
-                    <Label Text="UserName" WidthRequest="100" />
-                </Border>
-                <Border Style="{StaticResource BlankValue}">
-                    <Label LineBreakMode="TailTruncation" Text="{Binding UserName}" />
-                </Border>
-            </StackLayout>
+            <Border
+                Grid.Row="4"
+                Grid.Column="0"
+                Style="{StaticResource BlankKey}">
+                <Label Text="Взяли" />
+            </Border>
+            <Border
+                Grid.Row="4"
+                Grid.Column="1"
+                Style="{StaticResource BlankValue}">
+                <Label LineBreakMode="TailTruncation" Text="{Binding Orders.TookInDate, StringFormat='{0:D}'}" />
+            </Border>
 
-            <StackLayout Orientation="Horizontal" Spacing="15">
-                <Border Style="{StaticResource BlankKey}">
-                    <Label Text="Took in date" WidthRequest="100" />
-                </Border>
-                <Border Style="{StaticResource BlankValue}">
-                    <Label LineBreakMode="TailTruncation" Text="{Binding Orders.TookInDate}" />
-                </Border>
-            </StackLayout>
+            <Border
+                Grid.Row="5"
+                Grid.Column="0"
+                Style="{StaticResource BlankKey}">
+                <Label Text="Книга повернута" />
+            </Border>
+            <Border
+                Grid.Row="5"
+                Grid.Column="1"
+                Style="{StaticResource BlankValue}">
+                <Label LineBreakMode="TailTruncation" Text="{Binding Returned}" />
+            </Border>
 
-            <StackLayout Orientation="Horizontal" Spacing="15">
-                <Border Style="{StaticResource BlankKey}">
-                    <Label Text="Returned" WidthRequest="100" />
-                </Border>
-                <Border Style="{StaticResource BlankValue}">
-                    <Label LineBreakMode="TailTruncation" Text="{Binding Orders.Returned}" />
-                </Border>
-            </StackLayout>
-
-        </StackLayout>
+            <Button
+                Grid.Row="6"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Margin="0,10,0,0"
+                Command="{Binding ReturnedBook}"
+                IsVisible="{Binding VisibleReturned}"
+                Text="Повернути" />
+        </Grid>
     </Border>
 
 </ContentView>

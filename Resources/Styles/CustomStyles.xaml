@@ -37,9 +37,9 @@
     </Style>
 
     <Style x:Key="Select" TargetType="Picker">
-        <Setter Property="BackgroundColor" Value="{StaticResource CustomOrangeLight}" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource CustomTemp3}, Dark={StaticResource Gray200}}" />
         <Setter Property="FontSize" Value="Small" />
-        <Setter Property="TextColor" Value="{StaticResource CustomWhite}" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Default={StaticResource CustomDark}}" />
         <Setter Property="TitleColor" Value="{StaticResource CustomDark}" />
     </Style>
 
@@ -50,10 +50,10 @@
 
     <Style x:Key="ViewRecord" TargetType="Border">
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Default={StaticResource CustomAquaLight}}" />
-        <Setter Property="StrokeShape" Value="RoundRectangle 10" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 8" />
         <Setter Property="Margin" Value="0,10" />
-        <Setter Property="Padding" Value="15" />
-        <Setter Property="MaximumWidthRequest" Value="600" />
+        <Setter Property="Padding" Value="8" />
+        <Setter Property="MaximumWidthRequest" Value="460" />
     </Style>
 
     <Style x:Key="ViewRecordSelected" TargetType="Border">
@@ -75,15 +75,15 @@
         <Setter Property="Background" Value="{AppThemeBinding Default={StaticResource CustomWhite}}" />
         <Setter Property="Stroke" Value="{StaticResource Black}" />
         <Setter Property="Padding" Value="8,2" />
-        <Setter Property="StrokeShape" Value="RoundRectangle 10" />
-        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 5" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
     </Style>
 
     <Style x:Key="BlankValue" TargetType="Border">
         <Setter Property="Background" Value="{AppThemeBinding Default={StaticResource CustomWhite}}" />
         <Setter Property="Stroke" Value="{StaticResource Black}" />
         <Setter Property="Padding" Value="8,2" />
-        <Setter Property="StrokeShape" Value="RoundRectangle 10" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 5" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
     </Style>
 
@@ -92,7 +92,7 @@
     </Style>
 
     <Style x:Key="Heder" TargetType="StackLayout">
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Default={StaticResource CustomBlueLight}}" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource CustomBlueLight}, Dark={DynamicResource Gray100}}" />
         <Setter Property="Padding" Value="30,10" />
     </Style>
 

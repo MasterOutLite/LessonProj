@@ -14,19 +14,19 @@
         Shell.FlyoutItemIsVisible="False" />
 
 
-    <FlyoutItem Title="Book view">
+    <FlyoutItem Title="Книги">
         <ShellContent ContentTemplate="{DataTemplate page:BookView}" Route="BookView" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Order view">
+    <FlyoutItem Title="Замовлення">
         <ShellContent ContentTemplate="{DataTemplate page:OrderView}" Route="OrderView" />
     </FlyoutItem>
 
-    <FlyoutItem Title="User list view">
+    <FlyoutItem Title="Користувачі">
         <ShellContent ContentTemplate="{DataTemplate page:UserListView}" Route="UserListView" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Add Library">
+    <FlyoutItem Title="Додати бібліотеку">
         <ShellContent ContentTemplate="{DataTemplate page:AddLibrary}" Route="AddLibrary" />
     </FlyoutItem>
 </Shell>

@@ -8,58 +8,87 @@
     x:DataType="modal:User">
 
     <Border Style="{StaticResource ViewRecord}">
-        <StackLayout Orientation="Horizontal" Spacing="8">
-            <StackLayout
-                HorizontalOptions="FillAndExpand"
-                Orientation="Vertical"
-                Spacing="4">
+        <Grid
+            ColumnSpacing="4"
+            HorizontalOptions="FillAndExpand"
+            RowSpacing="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
 
+            <Border
+                Grid.Row="0"
+                Grid.Column="0"
+                Style="{StaticResource BlankKey}">
+                <Label Text="UUID" />
+            </Border>
+            <Border
+                Grid.Row="0"
+                Grid.Column="1"
+                Style="{StaticResource BlankValue}">
+                <Label LineBreakMode="TailTruncation" Text="{Binding Uuid}" />
+            </Border>
 
-                <StackLayout Orientation="Horizontal" Spacing="10">
-                    <Border Style="{StaticResource BlankKey}">
-                        <Label Text="UUID" WidthRequest="80" />
-                    </Border>
-                    <Border Style="{StaticResource BlankValue}">
-                        <Label Text="{Binding Uuid}" />
-                    </Border>
-                </StackLayout>
+            <Border
+                Grid.Row="1"
+                Grid.Column="0"
+                Style="{StaticResource BlankKey}">
+                <Label Text="Імя" />
+            </Border>
+            <Border
+                Grid.Row="1"
+                Grid.Column="1"
+                Style="{StaticResource BlankValue}">
+                <Label Text="{Binding Name}" />
+            </Border>
 
-                <StackLayout Orientation="Horizontal" Spacing="10">
-                    <Border Style="{StaticResource BlankKey}">
-                        <Label Text="Name" WidthRequest="80" />
-                    </Border>
-                    <Border Style="{StaticResource BlankValue}">
-                        <Label Text="{Binding Name}" />
-                    </Border>
-                </StackLayout>
+            <Border
+                Grid.Row="2"
+                Grid.Column="0"
+                Style="{StaticResource BlankKey}">
+                <Label Text="Прізвище" />
+            </Border>
+            <Border
+                Grid.Row="2"
+                Grid.Column="1"
+                Style="{StaticResource BlankValue}">
+                <Label Text="{Binding Lastname}" />
+            </Border>
 
-                <StackLayout Orientation="Horizontal" Spacing="10">
-                    <Border Style="{StaticResource BlankKey}">
-                        <Label Text="Lastname" WidthRequest="80" />
-                    </Border>
-                    <Border Style="{StaticResource BlankValue}">
-                        <Label Text="{Binding Lastname}" />
-                    </Border>
-                </StackLayout>
+            <Border
+                Grid.Row="3"
+                Grid.Column="0"
+                Style="{StaticResource BlankKey}">
+                <Label Text="Номер телефону" />
+            </Border>
+            <Border
+                Grid.Row="3"
+                Grid.Column="1"
+                Style="{StaticResource BlankValue}">
+                <Label LineBreakMode="TailTruncation" Text="{Binding Phone}" />
+            </Border>
 
-                <StackLayout Orientation="Horizontal" Spacing="10">
-                    <Border Style="{StaticResource BlankKey}">
-                        <Label Text="Phone" WidthRequest="80" />
-                    </Border>
-                    <Border Style="{StaticResource BlankValue}">
-                        <Label LineBreakMode="TailTruncation" Text="{Binding Phone}" />
-                    </Border>
-                </StackLayout>
-
-                <StackLayout Orientation="Horizontal" Spacing="10">
-                    <Border Style="{StaticResource BlankKey}">
-                        <Label Text="Mail" WidthRequest="80" />
-                    </Border>
-                    <Border Style="{StaticResource BlankValue}">
-                        <Label Text="{Binding Mail}" />
-                    </Border>
-                </StackLayout>
-            </StackLayout>
-        </StackLayout>
+            <Border
+                Grid.Row="4"
+                Grid.Column="0"
+                Style="{StaticResource BlankKey}">
+                <Label Text="Електронна пошта" />
+            </Border>
+            <Border
+                Grid.Row="4"
+                Grid.Column="1"
+                Style="{StaticResource BlankValue}">
+                <Label LineBreakMode="TailTruncation" Text="{Binding Mail}" />
+            </Border>
+        </Grid>
     </Border>
 </ContentView>

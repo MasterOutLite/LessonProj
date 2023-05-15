@@ -5,6 +5,11 @@ namespace LessonProj.ViewModal
 {
     public partial class BookViewModal : ObservableObject
     {
+        public Book Book { get; private set; }
+        [ObservableProperty]
+        private string _libraryName;        
+        public string InLibrary=>Book.InLibrary ? "Так" : "Ні";
+
         public BookViewModal (Book book, string libraryName)
         {
             Book = book;
@@ -13,9 +18,5 @@ namespace LessonProj.ViewModal
             else
                 LibraryName = libraryName;
         }
-        public Book Book { get; private set; }
-
-        [ObservableProperty]
-        private string _libraryName;
     }
 }

@@ -2,24 +2,24 @@
 {
     public class RequestAuth
     {
-        public string token { get; set; }
-        public string login { get; set; }
-        public string password { get; set; }
+        public string Token { get; set; }
+        public string Login { get; set; }
+        public string Password { get; set; }
 
         public RequestAuth (string token)
         {
-            this.token = token;
+            Token = token;
         }
 
         public RequestAuth (string login, string password)
         {
-            this.login = login;
-            this.password = password;
+            Login = login;
+            Password = password;
         }
 
         public RequestAuth (string token, string login, string password) : this(login, password)
         {
-            this.token = token;
+            Token = token;
         }
     }
 }

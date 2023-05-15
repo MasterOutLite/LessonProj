@@ -11,6 +11,7 @@ namespace LessonProj.ViewModal
     {
 
         public ObservableCollection<User> Users { get; } = new();
+        private List<User> _users = new();
         public HeaderViewModal HeaderViewModal { get; }
         public MoreBtnViewModal MoreBtnViewModal { get; }
         public User SelectedUser { get; set; }
@@ -23,9 +24,9 @@ namespace LessonProj.ViewModal
 
         private UserService _userService;
         private Action<User> _takeUser;
-        public UserListViewModal (UserService userService, 
+        public UserListViewModal (UserService userService,
                                   CollectionView collectionView, Action<User> takeUser = null)
-        {            
+        {
             _userService = userService;
             Selection = collectionView;
             _takeUser = takeUser;
@@ -36,9 +37,10 @@ namespace LessonProj.ViewModal
 
             if (_userService.IsBackup)
             {
-                UpdateUser(_userService.Backup);
+                _users = _userService.Backup;
+                UpdateUser(_users);
             }
-        }     
+        }
 
         [RelayCommand]
         public async Task GetAllUser ()
@@ -51,10 +53,10 @@ namespace LessonProj.ViewModal
 
             try
             {
-                var response = await _userService.GetUsersAsync();
-                UpdateUser(response);
+                _users = await _userService.GetUsersAsync();
+                UpdateUser(_users);
             }
-            catch 
+            catch
             {
                 await Shell.Current.DisplayAlert("Fail update",
                     "Check network connection or this fail server", "Ok");
@@ -79,12 +81,31 @@ namespace LessonProj.ViewModal
             Selection.SelectedItem = null;
         }
 
-        private void UpdateUser(List<User> usersList)
+        [RelayCommand]
+        public void SearhUserByName (string name)
+        {
+            name = name.ToLower();
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                UpdateUser(_users);
+                return;
+            }
+            var search = _users.FindAll(user => user.Name.ToLower().Contains(name));
+            UpdateUser(search);
+        }
+
+        [RelayCommand]
+        public void SearchAll ()
+        {
+            SearhUserByName("");
+        }
+
+        private void UpdateUser (List<User> usersList)
         {
             Users.Clear();
             foreach (var user in usersList)
                 Users.Add(user);
             ShowFooter = true;
-        }        
+        }
     }
 }

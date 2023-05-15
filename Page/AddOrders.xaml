@@ -28,7 +28,7 @@
                                 Padding="6"
                                 FontSize="Medium"
                                 Style="{StaticResource SubTitle}"
-                                Text="Name Book" />
+                                Text="Книга" />
 
                             <StackLayout
                                 HorizontalOptions="EndAndExpand"
@@ -38,11 +38,11 @@
                                 <Button
                                     Command="{Binding ClearBookCommand}"
                                     Style="{StaticResource CustonButtonRed}"
-                                    Text="Delete" />
+                                    Text="Видалити" />
                                 <Button
                                     Command="{Binding TakeBookCommand}"
                                     Style="{StaticResource CustonButtonOrange}"
-                                    Text="Edit" />
+                                    Text="Змінити" />
                             </StackLayout>
                         </StackLayout>
 
@@ -59,7 +59,7 @@
                                 Padding="6"
                                 FontSize="Medium"
                                 Style="{StaticResource SubTitle}"
-                                Text="Customers"
+                                Text="Замовник"
                                 VerticalOptions="Center" />
                             <StackLayout
                                 HorizontalOptions="EndAndExpand"
@@ -70,12 +70,12 @@
                                     Padding="5"
                                     Command="{Binding ClearUserCommand}"
                                     Style="{StaticResource CustonButtonRed}"
-                                    Text="Delete" />
+                                    Text="Видалити" />
                                 <Button
                                     Padding="10,5"
                                     Command="{Binding TakeUserCommand}"
                                     Style="{StaticResource CustonButtonOrange}"
-                                    Text="Edit" />
+                                    Text="Змінити" />
                             </StackLayout>
                         </StackLayout>
                         <Border Style="{StaticResource Selected}">

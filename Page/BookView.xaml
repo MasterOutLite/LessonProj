@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+
 <ContentPage
     x:Class="LessonProj.Page.BookView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -13,7 +14,24 @@
         <StackLayout Orientation="Vertical">
             <component:Header BindingContext="{Binding HeaderViewModal}" />
 
-            <StackLayout Padding="0,15" Orientation="Vertical">
+            <StackLayout
+                Margin="30,15"
+                MaximumWidthRequest="800"
+                Orientation="Horizontal"
+                Spacing="6">
+                <SearchBar
+                    x:Name="searchBar"
+                    HorizontalOptions="FillAndExpand"
+                    Placeholder="Пошук по назві"
+                    SearchCommand="{Binding SearchBookByNameCommand}"
+                    SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}" />
+                <Button
+                    Command="{Binding SearchAllCommand}"
+                    HorizontalOptions="End"
+                    Text="X" />
+            </StackLayout>
+
+            <StackLayout Padding="15,15" Orientation="Vertical">
                 <CollectionView
                     x:Name="Selection"
                     ItemsSource="{Binding Books}"

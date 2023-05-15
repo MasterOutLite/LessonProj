@@ -23,15 +23,18 @@ namespace LessonProj.ViewModal
         private List<Library> _libraryList;
 
         private LibraryService _libraryService;
-        public AddBookViewModal (LibraryService libraryService)
+        private BookService _bookService;
+
+        public AddBookViewModal (LibraryService libraryService, BookService bookService)
         {
             _libraryService = libraryService;
+            _bookService = bookService;
             GenreList = new ObservableCollection<string> { "Roman", "History", "Fantasi" };
             LibraryList = new ObservableCollection<string>();
             var add = new ShowButton("Додати", new AsyncRelayCommand(PostBook));
             HeaderModal = new HeaderViewModal(add, true);
             Book.InLibrary = true;
-            GetLibrary().Wait();
+            GetLibrary().Wait(500);
         }
 
         public async Task GetLibrary ()
@@ -41,13 +44,12 @@ namespace LessonProj.ViewModal
                 if (!_libraryService.IsBackup)
                     await _libraryService.GetLibraryAsync();
             }
-            catch 
+            catch
             {
                 await Shell.Current.DisplayAlert("Get Library fail",
                    "Error connection to server.",
                    "Ok");
             }
-
             _libraryList = _libraryService.Backup;
             LibraryList.Clear();
             foreach (Library library in _libraryList)
@@ -66,11 +68,11 @@ namespace LessonProj.ViewModal
                 return;
             }
 
-
             Library selectLibrary = _libraryList[SelectLibraryIndex];
-            Book.LibraryUuid = selectLibrary.Name;
-
-            await Shell.Current.DisplayAlert("Book", $"Name '{Book.Name}'. Genre '{Book.Ganre}'. InLibrary '{Book.InLibrary}'. Author '{Book.Author}'. Library '{Book.LibraryUuid}'", "Ok");
+            Book.LibraryUuid = selectLibrary.Uuid;
+            Book.Genre = GenreList[SelectGenreIndex];
+            await _bookService.PostBookAsync(Book);
+            await Shell.Current.Navigation.PopAsync();
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using LessonProj.Component;
 using LessonProj.Modal;
 using LessonProj.Page;
 using LessonProj.Service;
@@ -38,7 +37,7 @@ namespace LessonProj.ViewModal
 
             if (_ordersService.IsBackup)
             {
-               UpdateOrders(_ordersService.Backup).Wait();              
+                UpdateOrders(_ordersService.Backup).Wait();
             }
         }
 
@@ -56,10 +55,11 @@ namespace LessonProj.ViewModal
                 var response = await _ordersService.GetOrdersListAsync();
                 await UpdateOrders(response);
             }
-            catch 
+            catch (Exception ex)
             {
+
                 await Shell.Current.DisplayAlert("Fail update",
-                    "Check network connection or this fail server", "Ok");
+                    "Check network connection or this fail server" + ex.Message, "Ok");
             }
         }
 
@@ -74,7 +74,6 @@ namespace LessonProj.ViewModal
         [RelayCommand]
         public async Task SelectionOrders ()
         {
-            await Shell.Current.DisplayAlert("Selected Orders", "Selected Orders", "Ok");
             _collectionView.SelectedItem = null;
         }
 
@@ -91,7 +90,8 @@ namespace LessonProj.ViewModal
                 Book book = await bookService.GetBookByUuidAsync(orders.BookUuid);
                 User user = await userService.GetUserByUuidAsync(orders.UserUuid);
 
-                Orders.Add(new OrdersViewModal(orders, book.Name, user.Name, librarian.Name));
+                Orders.Add(new OrdersViewModal(orders, user.Name + " " + user.Lastname, book.Name,
+                    librarian.Name + " " + librarian.Lastname, _ordersService.PutOrdersAsync));
             }
             ShowFooter = true;
         }

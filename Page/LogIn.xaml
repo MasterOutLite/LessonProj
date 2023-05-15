@@ -9,6 +9,7 @@
     Shell.FlyoutBehavior="Disabled"
     Shell.NavBarIsVisible="False">
     <StackLayout
+        Padding="30,15"
         MaximumWidthRequest="400"
         Orientation="Vertical"
         Spacing="20"
@@ -49,6 +50,6 @@
             Command="{Binding SkipCommand}"
             HorizontalOptions="Center"
             Style="{StaticResource CustonButtonGreen}"
-            Text="Увійти" />
+            Text="Пропустити" />
     </StackLayout>
 </ContentPage>

@@ -12,7 +12,7 @@ namespace LessonProj.Modal
         [ObservableProperty]
         private string _libraryUuid = "";
         [ObservableProperty]
-        private string _ganre = "";
+        private string _genre = "";
         [ObservableProperty]
         private string _author = "";
         [ObservableProperty]

@@ -58,7 +58,7 @@ namespace LessonProj.ViewModal
 
             PostOrders orders = new PostOrders(Book.Book.Uuid, User.Uuid);
             await _ordersService.PostOrdersAsync(orders);
-            await Shell.Current.DisplayAlert("Post", "Orders", "Ok");
+            await Shell.Current.Navigation.PopAsync();
         }
 
         [RelayCommand]
@@ -80,7 +80,6 @@ namespace LessonProj.ViewModal
             Book = null;
             ShowBook = false;
         }
-
         private void SetBook (BookViewModal book)
         {
             Book = book;

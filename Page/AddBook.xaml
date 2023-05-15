@@ -23,7 +23,7 @@
                 <StackLayout Orientation="Vertical" Spacing="15">
 
                     <StackLayout Orientation="Vertical">
-                        <Label Style="{StaticResource SubTitle}" Text="Name Book" />
+                        <Label Style="{StaticResource SubTitle}" Text="Назва книги" />
                         <Frame
                             Padding="0"
                             BorderColor="{StaticResource CustomDark}"
@@ -37,7 +37,7 @@
                     </StackLayout>
 
                     <StackLayout Orientation="Vertical">
-                        <Label Style="{StaticResource SubTitle}" Text="Author" />
+                        <Label Style="{StaticResource SubTitle}" Text="Автор книги" />
                         <Frame
                             Padding="0"
                             BorderColor="{StaticResource CustomDark}"
@@ -52,31 +52,29 @@
 
                     <StackLayout
                         x:Name="PickerBox"
-                        HorizontalOptions="StartAndExpand"
+                        HorizontalOptions="FillAndExpand"
                         Orientation="Vertical"
                         Spacing="30">
 
                         <Picker
                             x:Name="GenrePicker"
-                            Title="Select Genre"
+                            Title="Оберіть жанр книги"
+                            HorizontalOptions="FillAndExpand"
                             ItemsSource="{Binding GenreList}"
-                            MaximumWidthRequest="300"
-                            MinimumWidthRequest="200"
                             SelectedIndex="{Binding SelectGenreIndex}"
                             Style="{StaticResource Select}" />
 
                         <Picker
                             x:Name="LibraryPicker"
-                            Title="Select Library"
+                            Title="Оберіть бібліотеку"
+                            HorizontalOptions="FillAndExpand"
                             ItemsSource="{Binding LibraryList}"
-                            MaximumWidthRequest="300"
-                            MinimumWidthRequest="200"
                             SelectedIndex="{Binding SelectLibraryIndex}"
                             Style="{StaticResource Select}" />
                     </StackLayout>
 
                     <VerticalStackLayout>
-                        <Label Style="{StaticResource SubTitle}" Text="Book in Library" />
+                        <Label Style="{StaticResource SubTitle}" Text="Книга в бібліотеці" />
                         <Switch HorizontalOptions="Start" IsToggled="{Binding Book.InLibrary}" />
                     </VerticalStackLayout>
 
@@ -86,7 +84,7 @@
                         Command="{Binding PostBookCommand}"
                         HorizontalOptions="FillAndExpand"
                         Style="{StaticResource CustonButtonBlue}"
-                        Text="Add New Book" />
+                        Text="Додати" />
                 </StackLayout>
             </Frame>
         </StackLayout>
